@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Calzado Bless Puerto López</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-logo">
+                    <i class="fas fa-shoe-prints"></i>
+                    <a href="{{ url_for('index') }}">Calzado Bless Puerto López</a>
+                </h1>
+                <ul class="nav-menu">
+                    <li><a href="{{ url_for('index') }}" class="nav-link">Inicio</a></li>
+                    <li><a href="{{ url_for('index') }}#nosotros" class="nav-link">Nosotros</a></li>
+                    <li><a href="{{ url_for('index') }}#productos" class="nav-link">Productos</a></li>
+                    <li><a href="{{ url_for('index') }}#proveedores" class="nav-link">Proveedores</a></li>
+                    <li><a href="{{ url_for('contacto') }}" class="nav-link active">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contacto Section -->
+    <section class="contacto-hero">
+        <div class="container">
+            <h1>Contáctanos</h1>
+            <p>Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos pronto.</p>
+        </div>
+    </section>
+
+    <!-- Mensajes Flash -->
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-triangle' }}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Formulario de Contacto -->
+    <section class="contacto-form-section">
+        <div class="container">
+            <div class="contacto-grid">
+                <!-- Formulario -->
+                <div class="form-container">
+                    <h2>Envíanos un mensaje</h2>
+                    <form method="POST" class="contacto-form">
+                        <div class="form-group">
+                            <label for="nombre">
+                                <i class="fas fa-user"></i>
+                                Nombre completo
+                            </label>
+                            <input 
+                                type="text" 
+                                id="nombre" 
+                                name="nombre" 
+                                required 
+                                placeholder="Tu nombre completo"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correo">
+                                <i class="fas fa-envelope"></i>
+                                Correo electrónico
+                            </label>
+                            <input 
+                                type="email" 
+                                id="correo" 
+                                name="correo" 
+                                required 
+                                placeholder="tu@email.com"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">
+                                <i class="fas fa-comment"></i>
+                                Mensaje
+                            </label>
+                            <textarea 
+                                id="mensaje" 
+                                name="mensaje" 
+                                required 
+                                rows="6" 
+                                placeholder="Escribe tu mensaje aquí..."
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar mensaje
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Información de contacto -->
+                <div class="contacto-info">
+                    <h2>Información de contacto</h2>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Ubicación</h3>
+                            <p>Puerto López, Meta<br>Colombia</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@calzadobless.com<br>ventas@calzadobless.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Teléfono</h3>
+                            <p>+57 (8) 123-4567<br>WhatsApp: +57 321-123-4567</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Horarios</h3>
+                            <p>Lunes a Viernes: 8:00 AM - 6:00 PM<br>
+                               Sábados: 8:00 AM - 4:00 PM<br>
+                               Domingos: Cerrado</p>
+                        </div>
+                    </div>
+
+                    <!-- Redes sociales -->
+                    <div class="social-section">
+                        <h3>Síguenos en redes sociales</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="#" class="social-link instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="#" class="social-link whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa o información adicional -->
+    <section class="ubicacion-section">
+        <div class="container">
+            <h2>Nuestra ubicación</h2>
+            <div class="ubicacion-content">
+                <div class="ubicacion-info">
+                    <h3>¿Cómo llegar?</h3>
+                    <p>Nos encontramos en el corazón de Puerto López, Meta. Nuestra tienda está ubicada en una zona de fácil acceso y con amplio espacio de parqueadero para nuestros clientes.</p>
+                    <ul>
+                        <li><i class="fas fa-car"></i> Parqueadero disponible</li>
+                        <li><i class="fas fa-wheelchair"></i> Acceso para personas con discapacidad</li>
+                        <li><i class="fas fa-credit-card"></i> Aceptamos tarjetas de crédito y débito</li>
+                        <li><i class="fas fa-truck"></i> Servicio de domicilio disponible</li>
+                    </ul>
+                </div>
+                <div class="promocion-contacto">
+                    <h3>¡Promoción especial!</h3>
+                    <p class="promocion-text">20% de descuento en la segunda compra</p>
+                    <p>Menciona este descuento cuando visites nuestra tienda o haz tu pedido por WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Calzado Bless Puerto López</h3>
+                    <p>Tu tienda de confianza para calzado de calidad</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                        <li><a href="{{ url_for('index') }}">Inicio</a></li>
+                        <li><a href="{{ url_for('index') }}#nosotros">Nosotros</a></li>
+                        <li><a href="{{ url_for('index') }}#productos">Productos</a></li>
+                        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Calzado Bless Puerto López. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animación de formulario
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.contacto-form');
+            const inputs = form.querySelectorAll('input, textarea');
+
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+
+                // Verificar si ya tienen valor al cargar
+                if (input.value) {
+                    input.parentElement.classList.add('focused');
+                }
+            });
+
+            // Validación del formulario
+            form.addEventListener('submit', function(e) {
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add('error');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('error');
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Por favor, completa todos los campos.');
+                }
+            });
+
+            // Auto-ocultar alertas después de 5 segundos
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 300);
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
