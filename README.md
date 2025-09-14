@@ -243,8 +243,3 @@ Si tienes problemas con la instalación o despliegue:
 - [ ] Optimización SEO avanzada
 - [ ] Analytics y métricas
 
----
-
-**Desarrollado con ❤️ para Calzado Bless Puerto López**
-
-*¿Necesitas ayuda o tienes sugerencias? ¡Contáctanos a través del formulario en la web!*
