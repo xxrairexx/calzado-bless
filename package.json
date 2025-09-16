@@ -1,0 +1,29 @@
+{
+  "name": "calzado-bless",
+  "version": "1.0.0",
+  "description": "Una página web moderna y funcional para la empresa **Calzado Bless Puerto López**, desarrollada con Flask (Python) y diseñada para mostrar información de la empresa, productos, proveedores y brindar una experiencia de usuario completa con formulario de contacto y chatbot interactivo.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./static/src/tailwind.css -o ./static/dist/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./static/src/tailwind.css -o ./static/dist/tailwind.css --watch",
+    "dev:css": "tailwindcss -i ./static/src/tailwind.css -o ./static/dist/tailwind.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxrairexx/calzado-bless.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/xxrairexx/calzado-bless/issues"
+  },
+  "homepage": "https://github.com/xxrairexx/calzado-bless#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.0"
+  }
+}
