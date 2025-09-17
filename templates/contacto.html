@@ -4,38 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto - Calzado Bless Puerto López</title>
-    <!-- Tailwind CSS compilado -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/tailwind.css') }}">
-    <!-- CSS personalizado (mantener al final para overrides) -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+    <header class="header">
+        <nav class="container">
+            <div class="header-content">
                 <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="{{ url_for('index') }}" class="flex items-center space-x-3">
-                        <i class="fas fa-shoe-prints text-2xl text-brand-primary"></i>
-                        <span class="text-xl font-bold text-brand-dark">Calzado Bless Puerto López</span>
+                <div class="header-logo">
+                    <a href="{{ url_for('index') }}" class="logo-link">
+                        <img src="{{ url_for('static', filename='logo/logo.webp') }}" alt="Logo Bless" 
+                             class="logo-img">
+                        <span class="logo-text">Calzado Bless</span>
                     </a>
                 </div>
                 
                 <!-- Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ url_for('index') }}" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Inicio</a>
-                    <a href="{{ url_for('index') }}#nosotros" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Nosotros</a>
-                    <a href="{{ url_for('index') }}#productos" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Productos</a>
-                    <a href="{{ url_for('index') }}#proveedores" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Proveedores</a>
-                    <a href="{{ url_for('contacto') }}" class="text-brand-primary font-medium px-3 py-2 rounded-lg bg-brand-light border-b-2 border-brand-primary">Contacto</a>
+                <div class="header-nav desktop-nav">
+                    <a href="{{ url_for('index') }}" class="nav-link">Inicio</a>
+                    <a href="{{ url_for('index') }}#nosotros" class="nav-link">Nosotros</a>
+                    <a href="{{ url_for('index') }}#productos" class="nav-link">Productos</a>
+                    <a href="{{ url_for('index') }}#proveedores" class="nav-link">Proveedores</a>
+                    <a href="{{ url_for('contacto') }}" class="nav-link active">Contacto</a>
                 </div>
 
                 <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-toggle" class="p-2 text-brand-dark hover:text-brand-primary transition-colors duration-200">
-                        <i class="fas fa-bars text-xl"></i>
+                <div class="mobile-menu-toggle">
+                    <button id="mobile-menu-toggle" class="mobile-toggle-btn">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -43,23 +46,23 @@
     </header>
 
     <!-- Contacto Hero Section -->
-    <section class="bg-gradient-to-br from-brand-dark via-brand-primary to-brand-secondary text-white py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-shadow">Contáctanos</h1>
-            <p class="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
+    <section class="contact-hero">
+        <div class="container text-center">
+            <h1 class="contact-hero-title">Contáctanos</h1>
+            <p class="contact-hero-subtitle">
                 Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos pronto.
             </p>
         </div>
     </section>
 
     <!-- Mensajes Flash -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="flash-messages">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="mb-4 p-4 rounded-lg flex items-center space-x-3 {% if category == 'success' %}bg-green-100 border border-green-200 text-green-800{% else %}bg-red-100 border border-red-200 text-red-800{% endif %} animate-slide-up">
-                        <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-triangle' }} text-lg"></i>
-                        <span class="font-medium">{{ message }}</span>
+                    <div class="flash-message flash-{{ category }}">
+                        <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-triangle' }}"></i>
+                        <span>{{ message }}</span>
                     </div>
                 {% endfor %}
             {% endif %}
@@ -67,13 +70,13 @@
     </div>
 
     <!-- Formulario de Contacto -->
-    <section class="py-16 bg-brand-light">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12">
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-grid">
                 <!-- Formulario -->
-                <div class="card">
-                    <h2 class="text-2xl font-bold text-brand-dark mb-6">Envíanos un mensaje</h2>
-                    <form method="POST" class="space-y-6">
+                <div class="contact-form-card">
+                    <h2 class="form-title">Envíanos un mensaje</h2>
+                    <form method="POST" class="contact-form">
                         <div class="space-y-2">
                             <label for="nombre" class="flex items-center space-x-2 text-brand-dark font-medium">
                                 <i class="fas fa-user text-brand-primary"></i>
@@ -119,75 +122,72 @@
                             ></textarea>
                         </div>
 
-                        <button type="submit" class="btn-brand w-full flex items-center justify-center space-x-2">
+                        <button type="submit" class="btn-brand w-full">
                             <i class="fas fa-paper-plane"></i>
                             <span>Enviar mensaje</span>
                         </button>
                     </form>
+
+                    <!-- Promoción especial compacta -->
+                    <div class="contact-promotion-banner">
+                        <div class="promotion-compact-content">
+                            <div class="promotion-compact-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="promotion-compact-text">
+                                <h4 class="promotion-compact-title">¡Oferta Especial!</h4>
+                                <p class="promotion-compact-description">Por 3 compras de zapatos obtienes <strong>20% de descuento</strong> en tu próxima compra</p>
+                                <span class="promotion-compact-terms">*Aplican términos y condiciones</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Información de contacto -->
-                <div class="space-y-6">
-                    <h2 class="text-2xl font-bold text-brand-dark mb-6">Información de contacto</h2>
+                <div class="contact-info-section">
+                    <h2 class="contact-info-title">Información de contacto</h2>
                     
-                    <div class="card flex items-start space-x-4">
-                        <div class="bg-brand-primary text-white p-3 rounded-lg">
-                            <i class="fas fa-map-marker-alt text-lg"></i>
+                    <div class="contact-cards">
+                        <div class="contact-info-card">
+                            <div class="contact-card-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3 class="contact-card-title">Ubicación</h3>
+                                <p class="contact-card-text">Puerto López, Meta<br>Colombia</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-brand-dark mb-1">Ubicación</h3>
-                            <p class="text-gray-600">Puerto López, Meta<br>Colombia</p>
-                        </div>
-                    </div>
 
-                    <div class="card flex items-start space-x-4">
-                        <div class="bg-brand-primary text-white p-3 rounded-lg">
-                            <i class="fas fa-envelope text-lg"></i>
+                        <div class="contact-info-card">
+                            <div class="contact-card-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3 class="contact-card-title">Email</h3>
+                                <p class="contact-card-text">info@calzadobless.com<br>ventas@calzadobless.com</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-brand-dark mb-1">Email</h3>
-                            <p class="text-gray-600">info@calzadobless.com<br>ventas@calzadobless.com</p>
-                        </div>
-                    </div>
 
-                    <div class="card flex items-start space-x-4">
-                        <div class="bg-brand-primary text-white p-3 rounded-lg">
-                            <i class="fas fa-phone text-lg"></i>
+                        <div class="contact-info-card">
+                            <div class="contact-card-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3 class="contact-card-title">Teléfono</h3>
+                                <p class="contact-card-text">+57 (8) 123-4567<br>WhatsApp: +57 321-123-4567</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-brand-dark mb-1">Teléfono</h3>
-                            <p class="text-gray-600">+57 (8) 123-4567<br>WhatsApp: +57 321-123-4567</p>
-                        </div>
-                    </div>
 
-                    <div class="card flex items-start space-x-4">
-                        <div class="bg-brand-primary text-white p-3 rounded-lg">
-                            <i class="fas fa-clock text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-brand-dark mb-1">Horarios</h3>
-                            <p class="text-gray-600">Lunes a Viernes: 8:00 AM - 6:00 PM<br>
-                               Sábados: 8:00 AM - 4:00 PM<br>
-                               Domingos: Cerrado</p>
-                        </div>
-                    </div>
-
-                    <!-- Redes sociales -->
-                    <div class="card">
-                        <h3 class="font-semibold text-brand-dark mb-4">Síguenos en redes sociales</h3>
-                        <div class="flex space-x-4">
-                            <a href="#" class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                                <i class="fab fa-facebook-f"></i>
-                                <span>Facebook</span>
-                            </a>
-                            <a href="#" class="flex items-center space-x-2 bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors duration-200">
-                                <i class="fab fa-instagram"></i>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="#" class="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>WhatsApp</span>
-                            </a>
+                        <div class="contact-info-card">
+                            <div class="contact-card-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-card-content">
+                                <h3 class="contact-card-title">Horarios</h3>
+                                <p class="contact-card-text">Lunes a Viernes: 8:00 AM - 6:00 PM<br>
+                                   Sábados: 8:00 AM - 4:00 PM<br>
+                                   Domingos: Cerrado</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -195,83 +195,147 @@
         </div>
     </section>
 
-    <!-- Mapa o información adicional -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-brand-dark text-center mb-12">Nuestra ubicación</h2>
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-brand-dark mb-4">¿Cómo llegar?</h3>
-                    <p class="text-gray-600 mb-6">Nos encontramos en el corazón de Puerto López, Meta. Nuestra tienda está ubicada en una zona de fácil acceso y con amplio espacio de parqueadero para nuestros clientes.</p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center space-x-3 text-brand-dark">
-                            <i class="fas fa-car text-brand-primary"></i>
+    <!-- Información de ubicación mejorada -->
+    <section class="location-section">
+        <div class="container">
+            <h2 class="section-title">Nuestra ubicación</h2>
+            <div class="location-grid">
+                <div class="location-info-card">
+                    <div class="location-header">
+                        <div class="location-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="location-title">¿Cómo llegar?</h3>
+                    </div>
+                    <p class="location-description">Nos encontramos en el corazón de Puerto López, Meta. Nuestra tienda está ubicada en una zona de fácil acceso y con amplio espacio de parqueadero para nuestros clientes.</p>
+                    
+                    <div class="location-features">
+                        <div class="location-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
                             <span>Parqueadero disponible</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-brand-dark">
-                            <i class="fas fa-wheelchair text-brand-primary"></i>
+                        </div>
+                        <div class="location-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-wheelchair"></i>
+                            </div>
                             <span>Acceso para personas con discapacidad</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-brand-dark">
-                            <i class="fas fa-credit-card text-brand-primary"></i>
+                        </div>
+                        <div class="location-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
                             <span>Aceptamos tarjetas de crédito y débito</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-brand-dark">
-                            <i class="fas fa-truck text-brand-primary"></i>
+                        </div>
+                        <div class="location-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
                             <span>Servicio de domicilio disponible</span>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-                 <div class="promocion-contacto">
-                    <h3>¡Promoción especial!</h3>
-                    <p class="promocion-text">20% de descuento en la segunda compra</p>
-                    <p>Menciona este descuento cuando visites nuestra tienda o haz tu pedido por WhatsApp.</p>
+                
+                <div class="services-card">
+                    <div class="services-header">
+                        <div class="services-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="services-title">Servicios adicionales</h3>
+                    </div>
+                    <p class="services-description">Ofrecemos servicios especiales para hacer tu experiencia de compra más cómoda y satisfactoria.</p>
+                    
+                    <div class="services-list">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="service-text">
+                                <strong>Cambios y devoluciones</strong>
+                                <p>Política flexible de 30 días</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="service-text">
+                                <strong>Envoltorio para regalo</strong>
+                                <p>Servicio gratuito disponible</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="service-text">
+                                <strong>Reparación de calzado</strong>
+                                <p>Servicio técnico especializado</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="service-text">
+                                <strong>Reservas por teléfono</strong>
+                                <p>Aparta tu producto favorito</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gradient-dark text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-brand-accent mb-4">Calzado Bless Puerto López</h3>
-                    <p class="text-gray-300">Tu tienda de confianza para calzado de calidad</p>
-                    <div class="flex items-center space-x-2 text-gray-300">
-                        <i class="fas fa-map-marker-alt text-brand-accent"></i>
-                        <span>Puerto López, Meta</span>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Calzado Bless Puerto López</h3>
+                    <p class="footer-description">Tu tienda de confianza para calzado de calidad</p>
+                    <div class="footer-info">
+                        <div class="footer-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Puerto López, Meta</span>
+                        </div>
+                        <div class="footer-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@calzadobless.com</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-brand-accent mb-4">Enlaces rápidos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="{{ url_for('index') }}" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Inicio</a></li>
-                        <li><a href="{{ url_for('index') }}#nosotros" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Nosotros</a></li>
-                        <li><a href="{{ url_for('index') }}#productos" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Productos</a></li>
-                        <li><a href="{{ url_for('contacto') }}" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Contacto</a></li>
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="{{ url_for('index') }}" class="footer-link">Inicio</a></li>
+                        <li><a href="{{ url_for('index') }}#nosotros" class="footer-link">Nosotros</a></li>
+                        <li><a href="{{ url_for('index') }}#productos" class="footer-link">Productos</a></li>
+                        <li><a href="{{ url_for('contacto') }}" class="footer-link">Contacto</a></li>
                     </ul>
                 </div>
                 
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-brand-accent mb-4">Síguenos</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors duration-200 transform hover:scale-110">
+                <div class="footer-section">
+                    <h3 class="footer-title">Síguenos</h3>
+                    <div class="footer-social">
+                        <a href="#" class="social-link facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-full transition-colors duration-200 transform hover:scale-110">
+                        <a href="#" class="social-link instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full transition-colors duration-200 transform hover:scale-110">
+                        <a href="#" class="social-link whatsapp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-600 pt-6 text-center">
-                <p class="text-gray-400">&copy; 2024 Calzado Bless Puerto López. Todos los derechos reservados.</p>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Calzado Bless Puerto López. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>

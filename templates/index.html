@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ empresa.nombre }}</title>
     
-    <!-- Tailwind CSS compilado -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/tailwind.css') }}">
-    <!-- CSS personalizado (mantener al final para overrides) -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- CSS personalizado -->
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
     rel="stylesheet">
@@ -22,44 +23,44 @@
         <div class="promo-content">
             <div class="promo-text">
                 <span class="promo-main">ENVÍO GRATIS EN PEDIDOS SUPERIORES A $450.000</span>
-                <a href="#" class="promo-link" data-back="COMPRA YA!" data-front="Ver detalles"></a>
+                <a href="#productos" class="promo-link" data-back="COMPRA YA!" data-front="Ver detalles"></a>
             </div>
         </div>
     </section>
-    <!-- Header responsivo con Tailwind -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+    <!-- Header responsivo -->
+    <header class="header" id="main-header">
+        <nav class="container">
+            <div class="header-content">
                 <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="#inicio" class="flex items-center space-x-3">
+                <div class="header-logo">
+                    <a href="#inicio" class="logo-link">
                         <img src="{{ url_for('static', filename='logo/logo.webp') }}" alt="Logo Bless" 
-                             class="h-12 w-auto transition-transform duration-300 hover:scale-105">
-                        <span class="text-xl font-bold text-brand-dark hidden sm:block">Calzado Bless</span>
+                             class="logo-img">
+                        <span class="logo-text">Calzado Bless</span>
                     </a>
                 </div>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#inicio" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Inicio</a>
-                    <a href="#nosotros" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Nosotros</a>
-                    <a href="#productos" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Productos</a>
-                    <a href="#proveedores" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Proveedores</a>
-                    <a href="{{ url_for('contacto') }}" class="text-brand-dark hover:text-brand-primary font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-brand-light">Contacto</a>
+                <div class="header-nav desktop-nav">
+                    <a href="#inicio" class="nav-link">Inicio</a>
+                    <a href="#nosotros" class="nav-link">Nosotros</a>
+                    <a href="#productos" class="nav-link">Productos</a>
+                    <a href="#proveedores" class="nav-link">Proveedores</a>
+                    <a href="{{ url_for('contacto') }}" class="nav-link">Contacto</a>
                 </div>
 
                 <!-- Desktop Actions -->
-                <div class="hidden md:flex items-center space-x-4">
+                <div class="header-actions desktop-actions">
                     <!-- Search -->
-                    <div class="relative">
-                        <button id="search-toggle" class="p-2 text-brand-dark hover:text-brand-primary transition-colors duration-200 hover:bg-brand-light rounded-lg">
+                    <div class="search-container">
+                        <button id="search-toggle" class="search-toggle">
                             <i class="fas fa-search"></i>
                         </button>
-                        <div id="search-box" class="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 p-4 hidden">
-                            <div class="flex">
+                        <div id="search-box" class="search-box hidden">
+                            <div class="search-form">
                                 <input type="text" placeholder="Buscar productos..." id="search-input" 
-                                       class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:border-brand-primary">
-                                <button class="bg-brand-primary text-white px-4 py-2 rounded-r-lg hover:bg-brand-secondary transition-colors duration-200">
+                                       class="search-input">
+                                <button class="search-btn">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -67,49 +68,49 @@
                     </div>
                     
                     <!-- Cart -->
-                    <button id="cart-toggle" class="relative p-2 bg-brand-accent text-white rounded-lg hover:bg-brand-accent-dark transition-colors duration-200 transform hover:scale-105">
+                    <button id="cart-toggle" class="cart-btn">
                         <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        <span id="cart-count" class="cart-count">0</span>
                     </button>
                 </div>
 
                 <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-toggle" class="p-2 text-brand-dark hover:text-brand-primary transition-colors duration-200">
-                        <i class="fas fa-bars text-xl"></i>
+                <div class="mobile-menu-toggle">
+                    <button id="mobile-menu-toggle" class="mobile-toggle-btn">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile Navigation Menu -->
-            <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
-                <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a href="#inicio" class="block px-3 py-2 text-brand-dark hover:text-brand-primary hover:bg-brand-light rounded-lg font-medium transition-colors duration-200">Inicio</a>
-                    <a href="#nosotros" class="block px-3 py-2 text-brand-dark hover:text-brand-primary hover:bg-brand-light rounded-lg font-medium transition-colors duration-200">Nosotros</a>
-                    <a href="#productos" class="block px-3 py-2 text-brand-dark hover:text-brand-primary hover:bg-brand-light rounded-lg font-medium transition-colors duration-200">Productos</a>
-                    <a href="#proveedores" class="block px-3 py-2 text-brand-dark hover:text-brand-primary hover:bg-brand-light rounded-lg font-medium transition-colors duration-200">Proveedores</a>
-                    <a href="{{ url_for('contacto') }}" class="block px-3 py-2 text-brand-dark hover:text-brand-primary hover:bg-brand-light rounded-lg font-medium transition-colors duration-200">Contacto</a>
+            <div id="mobile-menu" class="mobile-nav hidden">
+                <div class="mobile-nav-content">
+                    <a href="#inicio" class="mobile-nav-link">Inicio</a>
+                    <a href="#nosotros" class="mobile-nav-link">Nosotros</a>
+                    <a href="#productos" class="mobile-nav-link">Productos</a>
+                    <a href="#proveedores" class="mobile-nav-link">Proveedores</a>
+                    <a href="{{ url_for('contacto') }}" class="mobile-nav-link">Contacto</a>
                     
                     <!-- Mobile Actions -->
-                    <div class="pt-4 border-t border-gray-200 mt-4">
-                        <div class="flex items-center justify-between px-3 py-2">
-                            <button id="mobile-search-toggle" class="flex items-center space-x-2 text-brand-dark hover:text-brand-primary transition-colors duration-200">
+                    <div class="mobile-actions">
+                        <div class="mobile-actions-row">
+                            <button id="mobile-search-toggle" class="mobile-search-btn">
                                 <i class="fas fa-search"></i>
                                 <span>Buscar</span>
                             </button>
-                            <button id="mobile-cart-toggle" class="relative bg-brand-accent text-white px-4 py-2 rounded-lg hover:bg-brand-accent-dark transition-colors duration-200">
-                                <i class="fas fa-shopping-cart mr-2"></i>
+                            <button id="mobile-cart-toggle" class="mobile-cart-btn">
+                                <i class="fas fa-shopping-cart"></i>
                                 <span>Carrito</span>
-                                <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                                <span id="mobile-cart-count" class="cart-count">0</span>
                             </button>
                         </div>
                         
                         <!-- Mobile Search Box -->
-                        <div id="mobile-search-box" class="hidden px-3 py-2">
-                            <div class="flex">
+                        <div id="mobile-search-box" class="mobile-search-box hidden">
+                            <div class="search-form">
                                 <input type="text" placeholder="Buscar productos..." id="mobile-search-input" 
-                                       class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:border-brand-primary">
-                                <button class="bg-brand-primary text-white px-4 py-2 rounded-r-lg hover:bg-brand-secondary transition-colors duration-200">
+                                       class="search-input">
+                                <button class="search-btn">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -121,110 +122,276 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="inicio" class="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-dark">
+    <section id="inicio" class="hero-section">
         <!-- Background overlay -->
-        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        <div class="hero-overlay"></div>
         
         <!-- Content -->
-        <div class="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-shadow animate-fade-in">
-                Bienvenidos a {{ empresa.nombre }}
-            </h1>
-            <p class="text-lg sm:text-xl md:text-2xl mb-8 opacity-90 max-w-2xl mx-auto animate-slide-up">
-                Calzado de calidad para toda la familia
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-bounce-in">
-                <a href="#productos" class="btn-accent inline-flex items-center space-x-2">
-                    <i class="fas fa-shoe-prints"></i>
-                    <span>Ver Productos</span>
-                </a>
-                <a href="{{ url_for('contacto') }}" class="btn-outline inline-flex items-center space-x-2">
-                    <i class="fas fa-envelope"></i>
-                    <span>Contacto</span>
-                </a>
+        <div class="hero-content">
+            <div class="hero-grid">
+                <!-- Text Content -->
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Bienvenidos a {{ empresa.nombre }}
+                    </h1>
+                    <p class="hero-subtitle">
+                        Calzado de calidad para toda la familia
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#productos" class="btn btn-accent">
+                            <i class="fas fa-shoe-prints"></i>
+                            <span>Ver Productos</span>
+                        </a>
+                        <a href="{{ url_for('contacto') }}" class="btn btn-outline">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contáctanos</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Image -->
+                <div class="hero-image">
+                    <div class="hero-image-container">
+                        <div class="hero-image-bg"></div>
+                        <img src="{{ url_for('static', filename='zapatos/Zapato_portada.webp') }}" 
+                             alt="Zapato Destacado" 
+                             class="hero-image">
+                    </div>
+                </div>
             </div>
             
             <!-- Scroll indicator -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <a href="#nosotros" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">
-                    <i class="fas fa-chevron-down text-2xl"></i>
+            <div class="scroll-indicator">
+                <a href="#nosotros" class="scroll-link">
+                    <i class="fas fa-chevron-down"></i>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Promoción Especial -->
-    <section class="bg-gradient-to-r from-red-600 to-red-700 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6 text-center">
-                <i class="fas fa-percent text-4xl md:text-5xl text-yellow-300"></i>
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-2">¡Promoción Especial!</h2>
-                    <p class="text-lg md:text-xl font-semibold">{{ empresa.descuento }}</p>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Nosotros Section -->
-    <section id="nosotros" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="nosotros" class="about-section">
+        <div class="container">
             <h2 class="section-title">Quiénes Somos</h2>
-            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
-                <div class="card text-center group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <i class="fas fa-bullseye text-4xl md:text-5xl text-brand-primary mb-6 group-hover:scale-110 transition-transform duration-300"></i>
-                    <h3 class="text-xl md:text-2xl font-semibold text-brand-dark mb-4">Nuestra Misión</h3>
-                    <p class="text-gray-600 leading-relaxed">{{ empresa.mision }}</p>
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fas fa-bullseye about-icon"></i>
+                    <h3 class="about-card-title">Nuestra Misión</h3>
+                    <p class="about-card-text">{{ empresa.mision }}</p>
                 </div>
-                <div class="card text-center group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <i class="fas fa-eye text-4xl md:text-5xl text-brand-primary mb-6 group-hover:scale-110 transition-transform duration-300"></i>
-                    <h3 class="text-xl md:text-2xl font-semibold text-brand-dark mb-4">Nuestra Visión</h3>
-                    <p class="text-gray-600 leading-relaxed">{{ empresa.vision }}</p>
+                <div class="about-card">
+                    <i class="fas fa-eye about-icon"></i>
+                    <h3 class="about-card-title">Nuestra Visión</h3>
+                    <p class="about-card-text">{{ empresa.vision }}</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Productos Section -->
-    <section id="productos" class="py-16 bg-brand-light">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="productos" class="products-section">
+        <div class="container">
             <h2 class="section-title">Nuestros Productos</h2>
-            <div class="grid lg:grid-cols-3 gap-8 items-start">
-                <!-- Información principal del producto -->
-                <div class="lg:col-span-1">
-                    <div class="card text-center sticky top-24">
-                        <i class="fas fa-shopping-bag text-4xl md:text-5xl text-brand-accent mb-6"></i>
-                        <h3 class="text-xl md:text-2xl font-semibold text-brand-dark mb-4">{{ empresa.productos }}</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Ofrecemos una amplia variedad de calzado cómodo y de calidad, diseñado para brindar salud y
-                            bienestar a tus pies. Desde calzado casual hasta deportivo, tenemos opciones para cada miembro
-                            de tu familia.
-                        </p>
+            
+            <!-- Filtros de productos -->
+            <div class="products-filters">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="hombre">Hombre</button>
+                <button class="filter-btn" data-filter="infantil">Infantil</button>
+                <button class="filter-btn" data-filter="abierto">Calzado Abierto</button>
+            </div>
+            
+            <!-- Grid de productos -->
+            <div class="products-grid" id="productos-grid">
+                <!-- Productos para Hombre -->
+                <div class="product-card" data-category="hombre">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre.webp') }}" 
+                             alt="Calzado Hombre 1" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Calzado Hombre Clásico</h3>
+                            <p class="product-description">Elegante y cómodo para uso diario</p>
+                            <div class="product-footer">
+                                <span class="product-price">$89.900</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Calzado Hombre Clásico" data-price="89900">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Grid de productos -->
-                <div class="lg:col-span-2">
-                    <div class="grid sm:grid-cols-2 gap-6">
-                        <div class="card text-center group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                            <i class="fas fa-running text-3xl md:text-4xl text-brand-primary mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                            <h4 class="text-lg font-semibold text-brand-dark mb-2">Calzado Deportivo</h4>
-                            <p class="text-gray-600 text-sm">Para tus actividades físicas</p>
+
+                <div class="product-card" data-category="hombre">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre2.webp') }}" 
+                             alt="Calzado Hombre 2" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Calzado Hombre Deportivo</h3>
+                            <p class="product-description">Perfecto para actividades deportivas</p>
+                            <div class="product-footer">
+                                <span class="product-price">$75.500</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Calzado Hombre Deportivo" data-price="75500">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="card text-center group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                            <i class="fas fa-briefcase text-3xl md:text-4xl text-brand-primary mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                            <h4 class="text-lg font-semibold text-brand-dark mb-2">Calzado Formal</h4>
-                            <p class="text-gray-600 text-sm">Para ocasiones especiales</p>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="hombre">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre3.webp') }}" 
+                             alt="Calzado Hombre 3" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Calzado Hombre Formal</h3>
+                            <p class="product-description">Ideal para ocasiones especiales</p>
+                            <div class="product-footer">
+                                <span class="product-price">$120.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Calzado Hombre Formal" data-price="120000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="card text-center group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                            <i class="fas fa-child text-3xl md:text-4xl text-brand-primary mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                            <h4 class="text-lg font-semibold text-brand-dark mb-2">Calzado Infantil</h4>
-                            <p class="text-gray-600 text-sm">Cómodo y seguro para niños</p>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="hombre">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre4.webp') }}" 
+                             alt="Calzado Hombre 4" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Calzado Hombre Casual</h3>
+                            <p class="product-description">Cómodo para el día a día</p>
+                            <div class="product-footer">
+                                <span class="product-price">$95.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Calzado Hombre Casual" data-price="95000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="card text-center group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                            <i class="fas fa-female text-3xl md:text-4xl text-brand-primary mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                            <h4 class="text-lg font-semibold text-brand-dark mb-2">Calzado Femenino</h4>
-                            <p class="text-gray-600 text-sm">Elegancia y comodidad</p>
+                    </div>
+                </div>
+
+                <!-- Productos Infantiles -->
+                <div class="product-card" data-category="infantil">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/infantil.webp') }}" 
+                             alt="Calzado Infantil 1" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Calzado Infantil Colorido</h3>
+                            <p class="product-description">Divertido y cómodo para niños</p>
+                            <div class="product-footer">
+                                <span class="product-price">$45.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Calzado Infantil Colorido" data-price="45000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="infantil">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/infantil2.webp') }}" 
+                             alt="Calzado Infantil 2" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Calzado Infantil Deportivo</h3>
+                            <p class="product-description">Para pequeños atletas</p>
+                            <div class="product-footer">
+                                <span class="product-price">$52.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Calzado Infantil Deportivo" data-price="52000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="infantil">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/infantil3.webp') }}" 
+                             alt="Calzado Infantil 3" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Calzado Infantil Escolar</h3>
+                            <p class="product-description">Resistente para el colegio</p>
+                            <div class="product-footer">
+                                <span class="product-price">$48.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Calzado Infantil Escolar" data-price="48000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calzado Abierto -->
+                <div class="product-card" data-category="abierto">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Zapato_abierto.webp') }}" 
+                             alt="Calzado Abierto 1" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Sandalias Elegantes</h3>
+                            <p class="product-description">Frescas y cómodas</p>
+                            <div class="product-footer">
+                                <span class="product-price">$65.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Sandalias Elegantes" data-price="65000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="abierto">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Zapato_abierto2.webp') }}" 
+                             alt="Calzado Abierto 2" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Sandalias Deportivas</h3>
+                            <p class="product-description">Para actividades al aire libre</p>
+                            <div class="product-footer">
+                                <span class="product-price">$58.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Sandalias Deportivas" data-price="58000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="abierto">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Zapato_abierto3.webp') }}" 
+                             alt="Calzado Abierto 3" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Sandalias Casual</h3>
+                            <p class="product-description">Perfectas para el verano</p>
+                            <div class="product-footer">
+                                <span class="product-price">$42.000</span>
+                                <button class="add-to-cart-btn" 
+                                        data-product="Sandalias Casual" data-price="42000">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -233,21 +400,42 @@
     </section>
 
     <!-- Proveedores Section -->
-    <section id="proveedores" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="proveedores" class="providers-section">
+        <div class="container">
             <h2 class="section-title">Nuestros Proveedores</h2>
-            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p class="providers-description">
                 Trabajamos con las mejores marcas para ofrecerte calidad garantizada
             </p>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {% for proveedor in empresa.proveedores %}
-                <div class="card text-center group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-12 h-12 mx-auto bg-brand-primary rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-handshake text-white"></i>
+            
+            <!-- Carousel de proveedores -->
+            <div class="providers-carousel-wrapper">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="proveedores-carousel">
+                        {% for proveedor in empresa.proveedores %}
+                        <div class="carousel-item">
+                            <div class="provider-card">
+                                <div class="provider-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <span class="provider-name">{{ proveedor }}</span>
+                                <div class="provider-label">Proveedor Certificado</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- Duplicar para efecto infinito -->
+                        {% for proveedor in empresa.proveedores %}
+                        <div class="carousel-item">
+                            <div class="provider-card">
+                                <div class="provider-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <span class="provider-name">{{ proveedor }}</span>
+                                <div class="provider-label">Proveedor Certificado</div>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
-                    <span class="text-brand-dark font-medium group-hover:text-brand-primary transition-colors duration-300">{{ proveedor }}</span>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </section>
@@ -273,57 +461,61 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gradient-dark text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-brand-accent mb-4">{{ empresa.nombre }}</h3>
-                    <p class="text-gray-300">Tu tienda de confianza para calzado de calidad</p>
-                    <div class="space-y-2">
-                        <div class="flex items-center space-x-2 text-gray-300">
-                            <i class="fas fa-map-marker-alt text-brand-accent"></i>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">{{ empresa.nombre }}</h3>
+                    <p class="footer-description">Tu tienda de confianza para calzado de calidad</p>
+                    <div class="footer-info">
+                        <div class="footer-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
                             <span>Puerto López, Colombia</span>
                         </div>
-                        <div class="flex items-center space-x-2 text-gray-300">
-                            <i class="fas fa-envelope text-brand-accent"></i>
+                        <div class="footer-info-item">
+                            <i class="fas fa-envelope"></i>
                             <span>info@calzadobless.com</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-brand-accent mb-4">Enlaces rápidos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#inicio" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Inicio</a></li>
-                        <li><a href="#nosotros" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Nosotros</a></li>
-                        <li><a href="#productos" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Productos</a></li>
-                        <li><a href="{{ url_for('contacto') }}" class="text-gray-300 hover:text-brand-accent transition-colors duration-200">Contacto</a></li>
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                        <li><a href="#nosotros" class="footer-link">Nosotros</a></li>
+                        <li><a href="#productos" class="footer-link">Productos</a></li>
+                        <li><a href="{{ url_for('contacto') }}" class="footer-link">Contacto</a></li>
                     </ul>
                 </div>
                 
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-brand-accent mb-4">Síguenos</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors duration-200 transform hover:scale-110">
+                <div class="footer-section">
+                    <h3 class="footer-title">Síguenos</h3>
+                    <div class="footer-social">
+                        <a href="#" class="social-link facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-full transition-colors duration-200 transform hover:scale-110">
+                        <a href="#" class="social-link instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full transition-colors duration-200 transform hover:scale-110">
+                        <a href="#" class="social-link whatsapp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-600 pt-6 text-center">
-                <p class="text-gray-400">&copy; 2024 {{ empresa.nombre }}. Todos los derechos reservados.</p>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 {{ empresa.nombre }}. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Variables globales para carrito
+        let cart = [];
+        let cartTotal = 0;
+
         // Mobile menu functionality
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -361,6 +553,69 @@
                 });
             }
 
+            // Filtros de productos
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover clase active de todos los botones
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Agregar clase active al botón clickeado
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    productCards.forEach(card => {
+                        if (filter === 'todos' || card.getAttribute('data-category') === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Funcionalidad de búsqueda
+            const searchInputs = ['search-input', 'mobile-search-input'];
+            searchInputs.forEach(inputId => {
+                const searchInput = document.getElementById(inputId);
+                if (searchInput) {
+                    searchInput.addEventListener('input', searchProducts);
+                    searchInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            performSearch();
+                        }
+                    });
+                }
+            });
+
+            // Botones de búsqueda
+            const searchButtons = document.querySelectorAll('.search-btn');
+            searchButtons.forEach(button => {
+                button.addEventListener('click', performSearch);
+            });
+
+            // Carrito de compras
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+
+            // Toggle carrito
+            const cartToggle = document.getElementById('cart-toggle');
+            const mobileCartToggle = document.getElementById('mobile-cart-toggle');
+            
+            if (cartToggle) {
+                cartToggle.addEventListener('click', toggleCart);
+            }
+            if (mobileCartToggle) {
+                mobileCartToggle.addEventListener('click', toggleCart);
+            }
+
+            // Carousel de proveedores
+            initCarousel();
+
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -379,6 +634,315 @@
                 });
             });
         });
+
+        // Función para realizar búsqueda
+        function performSearch() {
+            const searchInputDesktop = document.getElementById('search-input');
+            const searchInputMobile = document.getElementById('mobile-search-input');
+            const searchTerm = (searchInputDesktop?.value || searchInputMobile?.value || '').toLowerCase();
+            
+            if (searchTerm.trim()) {
+                // Redirigir a la sección de productos
+                const productosSection = document.getElementById('productos');
+                if (productosSection) {
+                    productosSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Realizar la búsqueda
+                    searchProducts(searchTerm);
+                    
+                    // Cerrar cajas de búsqueda
+                    const searchBox = document.getElementById('search-box');
+                    const mobileSearchBox = document.getElementById('mobile-search-box');
+                    if (searchBox) searchBox.classList.add('hidden');
+                    if (mobileSearchBox) mobileSearchBox.classList.add('hidden');
+                    
+                    // Cerrar menú móvil si está abierto
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                }
+            }
+        }
+
+        // Función de búsqueda de productos
+        function searchProducts(searchTerm = null) {
+            if (!searchTerm) {
+                searchTerm = event.target.value.toLowerCase();
+            }
+            const productCards = document.querySelectorAll('.product-card');
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-title').textContent.toLowerCase();
+                const productDescription = card.querySelector('.product-description').textContent.toLowerCase();
+
+                if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Reset filtros cuando se busca
+            if (searchTerm) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                const todosBtn = document.querySelector('.filter-btn[data-filter="todos"]');
+                if (todosBtn) todosBtn.classList.add('active');
+            }
+        }
+
+        // Función para agregar al carrito
+        function addToCart() {
+            const productName = this.getAttribute('data-product');
+            const productPrice = parseInt(this.getAttribute('data-price'));
+
+            // Agregar al carrito (simplificado)
+            cart.push({
+                name: productName,
+                price: productPrice
+            });
+
+            updateCartCount();
+            showCartNotification(productName);
+        }
+
+        // Actualizar contador del carrito
+        function updateCartCount() {
+            const totalItems = cart.length;
+            const cartCount = document.getElementById('cart-count');
+            const mobileCartCount = document.getElementById('mobile-cart-count');
+            
+            if (cartCount) cartCount.textContent = totalItems;
+            if (mobileCartCount) mobileCartCount.textContent = totalItems;
+        }
+
+        // Mostrar notificación de producto agregado
+        function showCartNotification(productName) {
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${productName} agregado al carrito</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animar entrada
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Toggle carrito
+        function toggleCart() {
+            let cartModal = document.getElementById('cart-modal');
+            
+            if (!cartModal) {
+                createCartModal();
+                cartModal = document.getElementById('cart-modal');
+            }
+            
+            updateCartModal();
+            cartModal.classList.toggle('hidden');
+        }
+
+        // Crear modal del carrito
+        function createCartModal() {
+            const modalHTML = `
+                <div id="cart-modal" class="cart-modal hidden">
+                    <div class="cart-modal-content">
+                        <div class="cart-modal-header">
+                            <h3 class="cart-modal-title">Carrito de Compras</h3>
+                            <button id="close-cart" class="cart-close-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="cart-items" class="cart-items"></div>
+                        <div class="cart-modal-footer">
+                            <div class="cart-total-row">
+                                <span class="cart-total-label">Total:</span>
+                                <span id="cart-total" class="cart-total-amount">$0</span>
+                            </div>
+                            <div class="cart-buttons">
+                                <button id="clear-cart-btn" class="clear-cart-btn">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Vaciar Carrito
+                                </button>
+                                <button id="checkout-btn" class="checkout-btn">
+                                    <i class="fas fa-credit-card"></i>
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Event listener para cerrar
+            document.getElementById('close-cart').addEventListener('click', () => {
+                document.getElementById('cart-modal').classList.add('hidden');
+            });
+            
+            // Event listener para vaciar carrito
+            document.getElementById('clear-cart-btn').addEventListener('click', clearCart);
+            
+            // Event listener para comprar
+            document.getElementById('checkout-btn').addEventListener('click', processCheckout);
+            
+            // Cerrar al hacer click fuera
+            document.getElementById('cart-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'cart-modal') {
+                    e.target.classList.add('hidden');
+                }
+            });
+        }
+
+        // Actualizar modal del carrito
+        function updateCartModal() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const clearCartBtn = document.getElementById('clear-cart-btn');
+            
+            if (!cartItems) return;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Tu carrito está vacío</p>
+                        <p class="cart-empty-subtitle">Agrega algunos productos para continuar</p>
+                    </div>
+                `;
+                cartTotal.textContent = '$0';
+                if (checkoutBtn) checkoutBtn.disabled = true;
+                if (clearCartBtn) clearCartBtn.disabled = true;
+                return;
+            }
+            
+            if (checkoutBtn) checkoutBtn.disabled = false;
+            if (clearCartBtn) clearCartBtn.disabled = false;
+            
+            let total = 0;
+            cartItems.innerHTML = cart.map((item, index) => {
+                total += item.price;
+                
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <p class="cart-item-price">$${item.price.toLocaleString()}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="cart-item-remove">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+            
+            cartTotal.textContent = `$${total.toLocaleString()}`;
+        }
+
+        // Función para vaciar el carrito
+        function clearCart() {
+            cart = [];
+            updateCartCount();
+            updateCartModal();
+            showCartNotification('Carrito vaciado');
+        }
+
+        // Función para procesar la compra
+        function processCheckout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const itemCount = cart.length;
+            
+            // Mostrar confirmación de compra
+            const confirmation = confirm(`¿Confirmar compra?\n\nProductos: ${itemCount}\nTotal: $${total.toLocaleString()}\n\n¿Deseas proceder con la compra?`);
+            
+            if (confirmation) {
+                // Simular procesamiento de pago
+                const cartModal = document.getElementById('cart-modal');
+                if (cartModal) cartModal.classList.add('hidden');
+                
+                // Vaciar carrito después de la compra
+                cart = [];
+                updateCartCount();
+                
+                // Mostrar mensaje de éxito
+                showPurchaseSuccess(itemCount, total);
+            }
+        }
+
+        // Mostrar mensaje de compra exitosa
+        function showPurchaseSuccess(itemCount, total) {
+            const successModal = document.createElement('div');
+            successModal.className = 'purchase-success-modal';
+            successModal.innerHTML = `
+                <div class="purchase-success-content">
+                    <div class="purchase-success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="purchase-success-title">¡Compra Exitosa!</h3>
+                    <p class="purchase-success-message">
+                        Gracias por tu compra de ${itemCount} producto${itemCount > 1 ? 's' : ''}<br>
+                        Total pagado: $${total.toLocaleString()}
+                    </p>
+                    <p class="purchase-success-info">
+                        Recibirás un correo de confirmación pronto.<br>
+                        Tu pedido será procesado en 1-2 días hábiles.
+                    </p>
+                    <button class="purchase-success-close" onclick="closePurchaseSuccess()">
+                        Continuar Comprando
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(successModal);
+            
+            // Auto cerrar después de 8 segundos
+            setTimeout(() => {
+                closePurchaseSuccess();
+            }, 8000);
+        }
+
+        // Cerrar modal de compra exitosa
+        function closePurchaseSuccess() {
+            const modal = document.querySelector('.purchase-success-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Remover producto del carrito
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            updateCartModal();
+        }
+
+        // Inicializar carousel (solo animación automática)
+        function initCarousel() {
+            // El carousel funciona solo con CSS, no necesita JavaScript para la animación automática
+            console.log('Carousel de proveedores iniciado con animación automática');
+        }
 
         // Chatbot functionality
         const chatbotToggle = document.getElementById('chatbot-toggle');
