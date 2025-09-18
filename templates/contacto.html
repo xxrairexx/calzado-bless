@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <!-- Header -->
@@ -40,6 +41,17 @@
                     <button id="mobile-menu-toggle" class="mobile-toggle-btn">
                         <i class="fas fa-bars"></i>
                     </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-nav hidden">
+                <div class="mobile-nav-content">
+                    <a href="{{ url_for('index') }}" class="mobile-nav-link">Inicio</a>
+                    <a href="{{ url_for('index') }}#nosotros" class="mobile-nav-link">Nosotros</a>
+                    <a href="{{ url_for('index') }}#productos" class="mobile-nav-link">Productos</a>
+                    <a href="{{ url_for('index') }}#proveedores" class="mobile-nav-link">Proveedores</a>
+                    <a href="{{ url_for('contacto') }}" class="mobile-nav-link active">Contacto</a>
                 </div>
             </div>
         </nav>
@@ -341,9 +353,42 @@
     </footer>
 
     <script>
-        // Animación de formulario
+        // Funcionalidad del menú móvil
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('.contacto-form');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    const icon = this.querySelector('i');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        icon.className = 'fas fa-bars';
+                    } else {
+                        icon.className = 'fas fa-times';
+                    }
+                });
+
+                // Cerrar menú al hacer clic en un enlace
+                const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
+                    });
+                });
+
+                // Cerrar menú al cambiar el tamaño de pantalla
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
+                    }
+                });
+            }
+
+            // Animación de formulario
+            const form = document.querySelector('.contact-form');
             const inputs = form.querySelectorAll('input, textarea');
 
             inputs.forEach(input => {
@@ -383,7 +428,7 @@
             });
 
             // Auto-ocultar alertas después de 5 segundos
-            const alerts = document.querySelectorAll('.alert');
+            const alerts = document.querySelectorAll('.flash-message');
             alerts.forEach(alert => {
                 setTimeout(() => {
                     alert.style.opacity = '0';
@@ -391,6 +436,30 @@
                         alert.remove();
                     }, 300);
                 }, 5000);
+            });
+
+            // Animaciones de scroll para móvil
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observar elementos para animación
+            const animatedElements = document.querySelectorAll('.contact-info-card, .location-info-card, .services-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
             });
         });
     </script>

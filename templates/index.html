@@ -51,22 +51,6 @@
 
                 <!-- Desktop Actions -->
                 <div class="header-actions desktop-actions">
-                    <!-- Search -->
-                    <div class="search-container">
-                        <button id="search-toggle" class="search-toggle">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <div id="search-box" class="search-box hidden">
-                            <div class="search-form">
-                                <input type="text" placeholder="Buscar productos..." id="search-input" 
-                                       class="search-input">
-                                <button class="search-btn">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!-- Cart -->
                     <button id="cart-toggle" class="cart-btn">
                         <i class="fas fa-shopping-cart"></i>
@@ -91,31 +75,7 @@
                     <a href="#proveedores" class="mobile-nav-link">Proveedores</a>
                     <a href="{{ url_for('contacto') }}" class="mobile-nav-link">Contacto</a>
                     
-                    <!-- Mobile Actions -->
-                    <div class="mobile-actions">
-                        <div class="mobile-actions-row">
-                            <button id="mobile-search-toggle" class="mobile-search-btn">
-                                <i class="fas fa-search"></i>
-                                <span>Buscar</span>
-                            </button>
-                            <button id="mobile-cart-toggle" class="mobile-cart-btn">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Carrito</span>
-                                <span id="mobile-cart-count" class="cart-count">0</span>
-                            </button>
-                        </div>
-                        
-                        <!-- Mobile Search Box -->
-                        <div id="mobile-search-box" class="mobile-search-box hidden">
-                            <div class="search-form">
-                                <input type="text" placeholder="Buscar productos..." id="mobile-search-input" 
-                                       class="search-input">
-                                <button class="search-btn">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+            
                 </div>
             </div>
         </nav>
@@ -197,202 +157,734 @@
             <div class="products-filters">
                 <button class="filter-btn active" data-filter="todos">Todos</button>
                 <button class="filter-btn" data-filter="hombre">Hombre</button>
+                <button class="filter-btn" data-filter="mujer">Mujer</button>
                 <button class="filter-btn" data-filter="infantil">Infantil</button>
+                <button class="filter-btn" data-filter="elegante">Elegante</button>
                 <button class="filter-btn" data-filter="abierto">Calzado Abierto</button>
+            </div>
+            
+            <!-- Filtros avanzados -->
+            <div class="advanced-filters">
+                <div class="filter-group">
+                    <label for="color-filter">Color:</label>
+                    <select id="color-filter" class="filter-select">
+                        <option value="">Todos los colores</option>
+                        <option value="negro">Negro</option>
+                        <option value="marron">Marrón</option>
+                        <option value="blanco">Blanco</option>
+                        <option value="azul">Azul</option>
+                        <option value="rosa">Rosa</option>
+                        <option value="multicolor">Multicolor</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="size-filter">Talla:</label>
+                    <select id="size-filter" class="filter-select">
+                        <option value="">Todas las tallas</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Precio:</label>
+                    <select id="price-filter" class="filter-select">
+                        <option value="">Todos los precios</option>
+                        <option value="0-50000">Hasta $50.000</option>
+                        <option value="50000-100000">$50.000 - $100.000</option>
+                        <option value="100000-150000">$100.000 - $150.000</option>
+                        <option value="150000+">Más de $150.000</option>
+                    </select>
+                </div>
             </div>
             
             <!-- Grid de productos -->
             <div class="products-grid" id="productos-grid">
                 <!-- Productos para Hombre -->
-                <div class="product-card" data-category="hombre">
+                <div class="product-card" data-category="hombre" data-color="negro" data-size="41,42,43" data-price="89900">
                     <div class="product-image-container">
                         <img src="{{ url_for('static', filename='zapatos/hombre.webp') }}" 
-                             alt="Calzado Hombre 1" 
+                             alt="Calzado Hombre Clásico" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Calzado Hombre Clásico</h3>
-                            <p class="product-description">Elegante y cómodo para uso diario</p>
-                            <div class="product-footer">
-                                <span class="product-price">$89.900</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Calzado Hombre Clásico" data-price="89900">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-badge">Nuevo</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
                         </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Hombre</div>
+                        <h3 class="product-title">Zapato Clásico Negro</h3>
+                        <p class="product-description">Elegante y cómodo para uso diario</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 41, 42, 43</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$89.900</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Clásico Negro" data-price="89900">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <!-- Botón Ver más para móvil -->
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Clásico Negro', 89900)">
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </div>
 
-                <div class="product-card" data-category="hombre">
+                <div class="product-card" data-category="hombre" data-color="marron" data-size="40,41,42,43" data-price="75500">
                     <div class="product-image-container">
                         <img src="{{ url_for('static', filename='zapatos/hombre2.webp') }}" 
-                             alt="Calzado Hombre 2" 
+                             alt="Calzado Hombre Deportivo" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Calzado Hombre Deportivo</h3>
-                            <p class="product-description">Perfecto para actividades deportivas</p>
-                            <div class="product-footer">
-                                <span class="product-price">$75.500</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Calzado Hombre Deportivo" data-price="75500">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
                         </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Hombre</div>
+                        <h3 class="product-title">Zapato Deportivo Marrón</h3>
+                        <p class="product-description">Perfecto para actividades deportivas</p>
+                        <div class="product-details">
+                            <span class="product-color">Marrón</span>
+                            <span class="product-sizes">Tallas: 40, 41, 42, 43</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$75.500</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Deportivo Marrón" data-price="75500">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Deportivo Marrón', 75500)">
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </div>
 
-                <div class="product-card" data-category="hombre">
+                <div class="product-card" data-category="hombre" data-color="negro" data-size="41,42,43,44" data-price="120000">
                     <div class="product-image-container">
                         <img src="{{ url_for('static', filename='zapatos/hombre3.webp') }}" 
-                             alt="Calzado Hombre 3" 
+                             alt="Calzado Hombre Formal" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Calzado Hombre Formal</h3>
-                            <p class="product-description">Ideal para ocasiones especiales</p>
-                            <div class="product-footer">
-                                <span class="product-price">$120.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Calzado Hombre Formal" data-price="120000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Hombre</div>
+                        <h3 class="product-title">Zapato Formal Premium</h3>
+                        <p class="product-description">Ideal para ocasiones especiales</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 41, 42, 43, 44</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$120.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Formal Premium" data-price="120000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Formal Premium', 120000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="hombre" data-color="azul" data-size="40,41,42" data-price="95000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre4.webp') }}" 
+                             alt="Calzado Hombre Casual" 
+                             class="product-image">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Hombre</div>
+                        <h3 class="product-title">Zapato Casual Azul</h3>
+                        <p class="product-description">Cómodo para el día a día</p>
+                        <div class="product-details">
+                            <span class="product-color">Azul</span>
+                            <span class="product-sizes">Tallas: 40, 41, 42</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$95.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Casual Azul" data-price="95000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Casual Azul', 95000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="hombre" data-color="marron" data-size="41,42,43" data-price="85000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre5.webp') }}" 
+                             alt="Zapato Hombre Sport" 
+                             class="product-image">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Hombre</div>
+                        <h3 class="product-title">Zapato Sport Marrón</h3>
+                        <p class="product-description">Estilo deportivo urbano</p>
+                        <div class="product-details">
+                            <span class="product-color">Marrón</span>
+                            <span class="product-sizes">Tallas: 41, 42, 43</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$85.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Sport Marrón" data-price="85000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Sport Marrón', 85000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="hombre" data-color="negro" data-size="40,41,42,43" data-price="78000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre6.webp') }}" 
+                             alt="Zapato Hombre Urbano" 
+                             class="product-image">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Hombre</div>
+                        <h3 class="product-title">Zapato Urbano Negro</h3>
+                        <p class="product-description">Moderno y versátil</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 40, 41, 42, 43</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$78.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Urbano Negro" data-price="78000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Urbano Negro', 78000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="hombre" data-color="marron" data-size="41,42,43,44" data-price="92000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/hombre7.webp') }}" 
+                             alt="Zapato Hombre Executive" 
+                             class="product-image">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Hombre</div>
+                        <h3 class="product-title">Zapato Executive Marrón</h3>
+                        <p class="product-description">Para el profesional moderno</p>
+                        <div class="product-details">
+                            <span class="product-color">Marrón</span>
+                            <span class="product-sizes">Tallas: 41, 42, 43, 44</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$92.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Executive Marrón" data-price="92000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Executive Marrón', 92000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Productos Elegantes -->
+                <div class="product-card" data-category="elegante" data-color="negro" data-size="36,37,38,39" data-price="135000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Elegante.webp') }}" 
+                             alt="Zapato Elegante Clásico" 
+                             class="product-image">
+                        <div class="product-badge premium">Elegante</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Elegante</div>
+                        <h3 class="product-title">Zapato Elegante Clásico</h3>
+                        <p class="product-description">Sofisticación en cada paso</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 36, 37, 38, 39</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$135.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Elegante Clásico" data-price="135000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Elegante Clásico', 135000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="elegante" data-color="marron" data-size="37,38,39,40" data-price="145000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Elegante2.webp') }}" 
+                             alt="Zapato Elegante Marrón" 
+                             class="product-image">
+                        <div class="product-badge premium">Elegante</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Elegante</div>
+                        <h3 class="product-title">Zapato Elegante Marrón</h3>
+                        <p class="product-description">Elegancia atemporal</p>
+                        <div class="product-details">
+                            <span class="product-color">Marrón</span>
+                            <span class="product-sizes">Tallas: 37, 38, 39, 40</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$145.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Elegante Marrón" data-price="145000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card" data-category="hombre">
+                <div class="product-card" data-category="elegante" data-color="negro" data-size="36,37,38" data-price="155000">
                     <div class="product-image-container">
-                        <img src="{{ url_for('static', filename='zapatos/hombre4.webp') }}" 
-                             alt="Calzado Hombre 4" 
+                        <img src="{{ url_for('static', filename='zapatos/Elegante3.webp') }}" 
+                             alt="Zapato Elegante Formal" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Calzado Hombre Casual</h3>
-                            <p class="product-description">Cómodo para el día a día</p>
-                            <div class="product-footer">
-                                <span class="product-price">$95.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Calzado Hombre Casual" data-price="95000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Elegante</div>
+                        <h3 class="product-title">Zapato Elegante Formal</h3>
+                        <p class="product-description">Para ocasiones especiales</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 36, 37, 38</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$155.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Elegante Formal" data-price="155000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="elegante" data-color="blanco" data-size="37,38,39" data-price="140000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Elegante4.webp') }}" 
+                             alt="Zapato Elegante Blanco" 
+                             class="product-image">
+                        <div class="product-badge">Nuevo</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Elegante</div>
+                        <h3 class="product-title">Zapato Elegante Blanco</h3>
+                        <p class="product-description">Pureza y elegancia</p>
+                        <div class="product-details">
+                            <span class="product-color">Blanco</span>
+                            <span class="product-sizes">Tallas: 37, 38, 39</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$140.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Elegante Blanco" data-price="140000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="elegante" data-color="negro" data-size="38,39,40" data-price="165000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Elegante5.webp') }}" 
+                             alt="Zapato Elegante Luxury" 
+                             class="product-image">
+                        <div class="product-badge premium">Luxury</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Elegante</div>
+                        <h3 class="product-title">Zapato Elegante Luxury</h3>
+                        <p class="product-description">El máximo en elegancia</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 38, 39, 40</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$165.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Elegante Luxury" data-price="165000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="elegante" data-color="marron" data-size="36,37,38,39" data-price="150000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/Elegante6.webp') }}" 
+                             alt="Zapato Elegante Deluxe" 
+                             class="product-image">
+                        <div class="product-badge premium">Deluxe</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Elegante</div>
+                        <h3 class="product-title">Zapato Elegante Deluxe</h3>
+                        <p class="product-description">Calidad superior</p>
+                        <div class="product-details">
+                            <span class="product-color">Marrón</span>
+                            <span class="product-sizes">Tallas: 36, 37, 38, 39</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$150.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Elegante Deluxe" data-price="150000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Productos Infantiles -->
-                <div class="product-card" data-category="infantil">
+                <div class="product-card" data-category="infantil" data-color="rosa" data-size="21,22,23,24,25,26,27,28" data-price="45000">
                     <div class="product-image-container">
-                        <img src="{{ url_for('static', filename='zapatos/infantil.webp') }}" 
-                             alt="Calzado Infantil 1" 
+                        <img src="{{ url_for('static', filename='zapatos/niña.webp') }}" 
+                             alt="Zapato Niña Rosa" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Calzado Infantil Colorido</h3>
-                            <p class="product-description">Divertido y cómodo para niños</p>
-                            <div class="product-footer">
-                                <span class="product-price">$45.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Calzado Infantil Colorido" data-price="45000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-badge">Niña</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
                         </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Infantil</div>
+                        <h3 class="product-title">Zapato Niña Rosa</h3>
+                        <p class="product-description">Dulce y cómodo para niñas</p>
+                        <div class="product-details">
+                            <span class="product-color">Rosa</span>
+                            <span class="product-sizes">Tallas: 21-28</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$45.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Niña Rosa" data-price="45000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Niña Rosa', 45000)">
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </div>
 
-                <div class="product-card" data-category="infantil">
+                <div class="product-card" data-category="infantil" data-color="multicolor" data-size="22,23,24,25,26,27,28,29" data-price="48000">
                     <div class="product-image-container">
-                        <img src="{{ url_for('static', filename='zapatos/infantil2.webp') }}" 
-                             alt="Calzado Infantil 2" 
+                        <img src="{{ url_for('static', filename='zapatos/niña2.webp') }}" 
+                             alt="Zapato Niña Colorido" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Calzado Infantil Deportivo</h3>
-                            <p class="product-description">Para pequeños atletas</p>
-                            <div class="product-footer">
-                                <span class="product-price">$52.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Calzado Infantil Deportivo" data-price="52000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-badge">Niña</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
                         </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Infantil</div>
+                        <h3 class="product-title">Zapato Niña Colorido</h3>
+                        <p class="product-description">Divertido y alegre</p>
+                        <div class="product-details">
+                            <span class="product-color">Multicolor</span>
+                            <span class="product-sizes">Tallas: 22-29</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$48.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Niña Colorido" data-price="48000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Niña Colorido', 48000)">
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </div>
 
-                <div class="product-card" data-category="infantil">
+                <div class="product-card" data-category="infantil" data-color="rosa" data-size="24,25,26,27,28,29,30" data-price="52000">
                     <div class="product-image-container">
-                        <img src="{{ url_for('static', filename='zapatos/infantil3.webp') }}" 
-                             alt="Calzado Infantil 3" 
+                        <img src="{{ url_for('static', filename='zapatos/niña3.webp') }}" 
+                             alt="Zapato Niña Princess" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Calzado Infantil Escolar</h3>
-                            <p class="product-description">Resistente para el colegio</p>
-                            <div class="product-footer">
-                                <span class="product-price">$48.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Calzado Infantil Escolar" data-price="48000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-badge">Princess</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
                         </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Infantil</div>
+                        <h3 class="product-title">Zapato Niña Princess</h3>
+                        <p class="product-description">Para pequeñas princesas</p>
+                        <div class="product-details">
+                            <span class="product-color">Rosa</span>
+                            <span class="product-sizes">Tallas: 24-30</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$52.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Niña Princess" data-price="52000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Niña Princess', 52000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="infantil" data-color="azul" data-size="23,24,25,26,27,28,29" data-price="46000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/niño.webp') }}" 
+                             alt="Zapato Niño Azul" 
+                             class="product-image">
+                        <div class="product-badge">Niño</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Infantil</div>
+                        <h3 class="product-title">Zapato Niño Azul</h3>
+                        <p class="product-description">Resistente y cómodo</p>
+                        <div class="product-details">
+                            <span class="product-color">Azul</span>
+                            <span class="product-sizes">Tallas: 23-29</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$46.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Niño Azul" data-price="46000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Niño Azul', 46000)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="infantil" data-color="negro" data-size="25,26,27,28,29,30" data-price="50000">
+                    <div class="product-image-container">
+                        <img src="{{ url_for('static', filename='zapatos/niño2.webp') }}" 
+                             alt="Zapato Niño Sport" 
+                             class="product-image">
+                        <div class="product-badge">Sport</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Infantil</div>
+                        <h3 class="product-title">Zapato Niño Sport</h3>
+                        <p class="product-description">Para pequeños atletas</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 25-30</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$50.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Zapato Niño Sport" data-price="50000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Niño Sport', 50000)">
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </div>
 
                 <!-- Calzado Abierto -->
-                <div class="product-card" data-category="abierto">
+                <div class="product-card" data-category="abierto" data-color="marron" data-size="37,38,39,40" data-price="65000">
                     <div class="product-image-container">
                         <img src="{{ url_for('static', filename='zapatos/Zapato_abierto.webp') }}" 
-                             alt="Calzado Abierto 1" 
+                             alt="Sandalia Elegante" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Sandalias Elegantes</h3>
-                            <p class="product-description">Frescas y cómodas</p>
-                            <div class="product-footer">
-                                <span class="product-price">$65.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Sandalias Elegantes" data-price="65000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-badge">Verano</div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
                         </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Abierto</div>
+                        <h3 class="product-title">Sandalia Elegante</h3>
+                        <p class="product-description">Frescas y cómodas</p>
+                        <div class="product-details">
+                            <span class="product-color">Marrón</span>
+                            <span class="product-sizes">Tallas: 37, 38, 39, 40</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$65.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Sandalia Elegante" data-price="65000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Sandalia Elegante', 65000)">
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </div>
 
-                <div class="product-card" data-category="abierto">
+                <div class="product-card" data-category="abierto" data-color="negro" data-size="38,39,40,41" data-price="58000">
                     <div class="product-image-container">
                         <img src="{{ url_for('static', filename='zapatos/Zapato_abierto2.webp') }}" 
-                             alt="Calzado Abierto 2" 
+                             alt="Sandalia Deportiva" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Sandalias Deportivas</h3>
-                            <p class="product-description">Para actividades al aire libre</p>
-                            <div class="product-footer">
-                                <span class="product-price">$58.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Sandalias Deportivas" data-price="58000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Abierto</div>
+                        <h3 class="product-title">Sandalia Deportiva</h3>
+                        <p class="product-description">Para actividades al aire libre</p>
+                        <div class="product-details">
+                            <span class="product-color">Negro</span>
+                            <span class="product-sizes">Tallas: 38, 39, 40, 41</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$58.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Sandalia Deportiva" data-price="58000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card" data-category="abierto">
+                <div class="product-card" data-category="abierto" data-color="blanco" data-size="36,37,38,39" data-price="42000">
                     <div class="product-image-container">
                         <img src="{{ url_for('static', filename='zapatos/Zapato_abierto3.webp') }}" 
-                             alt="Calzado Abierto 3" 
+                             alt="Sandalia Casual" 
                              class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Sandalias Casual</h3>
-                            <p class="product-description">Perfectas para el verano</p>
-                            <div class="product-footer">
-                                <span class="product-price">$42.000</span>
-                                <button class="add-to-cart-btn" 
-                                        data-product="Sandalias Casual" data-price="42000">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
                         </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Abierto</div>
+                        <h3 class="product-title">Sandalia Casual</h3>
+                        <p class="product-description">Perfectas para el verano</p>
+                        <div class="product-details">
+                            <span class="product-color">Blanco</span>
+                            <span class="product-sizes">Tallas: 36, 37, 38, 39</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$42.000</span>
+                            <button class="add-to-cart-btn" 
+                                    data-product="Sandalia Casual" data-price="42000">
+                                <i class="fas fa-cart-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                        <button class="view-more-btn" onclick="addToCartFromModal('Sandalia Casual', 42000)">
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </div>
             </div>
@@ -516,6 +1008,582 @@
         let cart = [];
         let cartTotal = 0;
 
+        // Estilos para el modal de producto
+        const modalStyles = `
+            <style>
+                .product-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1000;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 0.3s ease;
+                }
+
+                .product-modal.show {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                .product-modal-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.7);
+                    backdrop-filter: blur(5px);
+                }
+
+                .product-modal-content {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    border-radius: 12px;
+                    width: 90%;
+                    max-width: 600px;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+                }
+
+                .product-modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1.5rem;
+                    border-bottom: 1px solid #e5e7eb;
+                }
+
+                .product-modal-title {
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    color: #111827;
+                    margin: 0;
+                }
+
+                .product-modal-close {
+                    background: none;
+                    border: none;
+                    font-size: 1.5rem;
+                    color: #6b7280;
+                    cursor: pointer;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s ease;
+                }
+
+                .product-modal-close:hover {
+                    background: #f3f4f6;
+                    color: #111827;
+                }
+
+                .product-modal-body {
+                    padding: 1.5rem;
+                }
+
+                .product-modal-image {
+                    position: relative;
+                    margin-bottom: 1.5rem;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    background: #f9fafb;
+                    aspect-ratio: 16/10;
+                }
+
+                .modal-product-image {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .modal-product-badge {
+                    position: absolute;
+                    top: 1rem;
+                    left: 1rem;
+                    background: var(--color-primary);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 6px;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                }
+
+                .modal-product-category {
+                    font-size: 0.75rem;
+                    color: #6b7280;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                }
+
+                .modal-product-description {
+                    color: #4b5563;
+                    line-height: 1.6;
+                    margin-bottom: 1.5rem;
+                    font-size: 1rem;
+                }
+
+                .modal-product-details {
+                    background: #f9fafb;
+                    padding: 1rem;
+                    border-radius: 8px;
+                    margin-bottom: 1.5rem;
+                }
+
+                .modal-detail-item {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0.5rem 0;
+                    border-bottom: 1px solid #e5e7eb;
+                }
+
+                .modal-detail-item:last-child {
+                    border-bottom: none;
+                }
+
+                .modal-detail-label {
+                    font-weight: 600;
+                    color: #374151;
+                }
+
+                .modal-detail-value {
+                    color: #6b7280;
+                }
+
+                .modal-product-price {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: var(--color-primary);
+                    margin-bottom: 1.5rem;
+                }
+
+                .modal-product-actions {
+                    display: flex;
+                    gap: 1rem;
+                }
+
+                .modal-add-cart,
+                .modal-add-wishlist {
+                    flex: 1;
+                    padding: 0.75rem 1rem;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                }
+
+                .modal-add-cart {
+                    background: var(--color-accent);
+                    color: white;
+                }
+
+                .modal-add-cart:hover {
+                    background: var(--color-accent-dark);
+                    transform: translateY(-1px);
+                }
+
+                .modal-add-wishlist {
+                    background: #f3f4f6;
+                    color: #374151;
+                    border: 1px solid #d1d5db;
+                }
+
+                .modal-add-wishlist:hover {
+                    background: #e5e7eb;
+                }
+
+                .modal-add-wishlist.liked {
+                    background: #dc2626 !important;
+                    color: white !important;
+                    border-color: #dc2626 !important;
+                }
+
+                /* Notificaciones bonitas del carrito */
+                .cart-notification {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: white;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+                    padding: 1.25rem 1.5rem;
+                    z-index: 1001;
+                    opacity: 0;
+                    transform: translateX(120%) scale(0.8);
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    min-width: 280px;
+                    max-width: 400px;
+                    border-left: 4px solid #10b981;
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                }
+
+                .cart-notification.show {
+                    opacity: 1;
+                    transform: translateX(0) scale(1);
+                }
+
+                .cart-notification.cart-notification {
+                    border-left-color: #10b981;
+                    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(255, 255, 255, 0.95));
+                }
+
+                .cart-notification.wishlist-notification {
+                    border-left-color: #dc2626;
+                    background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), rgba(255, 255, 255, 0.95));
+                }
+
+                .notification-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                .notification-content i {
+                    font-size: 1.5rem;
+                    animation: iconPulse 0.6s ease-out;
+                }
+
+                .cart-notification i {
+                    color: #10b981;
+                }
+
+                .wishlist-notification i {
+                    color: #dc2626;
+                }
+
+                .notification-content span {
+                    font-weight: 600;
+                    color: #111827;
+                    font-size: 0.95rem;
+                    line-height: 1.4;
+                }
+
+                @keyframes iconPulse {
+                    0% { 
+                        transform: scale(0.8); 
+                        opacity: 0.6; 
+                    }
+                    50% { 
+                        transform: scale(1.2); 
+                        opacity: 1; 
+                    }
+                    100% { 
+                        transform: scale(1); 
+                        opacity: 1; 
+                    }
+                }
+
+                /* Modal del carrito bonito */
+                .cart-summary-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1002;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 0.3s ease;
+                }
+
+                .cart-summary-modal.show {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                .cart-summary-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.6);
+                    backdrop-filter: blur(5px);
+                    -webkit-backdrop-filter: blur(5px);
+                }
+
+                .cart-summary-content {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    background: white;
+                    border-radius: 16px;
+                    width: 90%;
+                    max-width: 450px;
+                    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+                    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    overflow: hidden;
+                }
+
+                .cart-summary-modal.show .cart-summary-content {
+                    transform: translate(-50%, -50%) scale(1);
+                }
+
+                .cart-summary-header {
+                    background: linear-gradient(135deg, #f59e0b, #d97706);
+                    color: white;
+                    padding: 1.5rem;
+                    text-align: center;
+                    position: relative;
+                }
+
+                .cart-summary-icon {
+                    background: rgba(255, 255, 255, 0.2);
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 1rem;
+                    animation: cartIconBounce 0.6s ease-out;
+                }
+
+                .cart-summary-icon i {
+                    font-size: 1.5rem;
+                }
+
+                .cart-summary-header h3 {
+                    margin: 0;
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                }
+
+                .cart-summary-close {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 1.25rem;
+                    cursor: pointer;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: background 0.2s ease;
+                }
+
+                .cart-summary-close:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                }
+
+                .cart-summary-body {
+                    padding: 2rem;
+                }
+
+                .cart-summary-info {
+                    margin-bottom: 2rem;
+                }
+
+                .cart-info-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0.75rem 0;
+                    border-bottom: 1px solid #f3f4f6;
+                }
+
+                .cart-info-item.total {
+                    border-bottom: none;
+                    padding-top: 1rem;
+                    border-top: 2px solid #f59e0b;
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                }
+
+                .cart-info-label {
+                    color: #6b7280;
+                    font-weight: 500;
+                }
+
+                .cart-info-value {
+                    color: #111827;
+                    font-weight: 600;
+                }
+
+                .cart-info-item.total .cart-info-value {
+                    color: #f59e0b;
+                    font-size: 1.25rem;
+                }
+
+                .cart-summary-actions {
+                    display: flex;
+                    gap: 1rem;
+                }
+
+                .btn-cart-continue,
+                .btn-cart-checkout {
+                    flex: 1;
+                    padding: 0.875rem 1rem;
+                    border: none;
+                    border-radius: 10px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    font-size: 0.9rem;
+                }
+
+                .btn-cart-continue {
+                    background: #f3f4f6;
+                    color: #374151;
+                    border: 1px solid #d1d5db;
+                }
+
+                .btn-cart-continue:hover {
+                    background: #e5e7eb;
+                    transform: translateY(-1px);
+                }
+
+                .btn-cart-checkout {
+                    background: linear-gradient(135deg, #10b981, #059669);
+                    color: white;
+                }
+
+                .btn-cart-checkout:hover {
+                    background: linear-gradient(135deg, #059669, #047857);
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+                }
+
+                /* Animaciones adicionales */
+                @keyframes cartIconBounce {
+                    0% { 
+                        transform: scale(0.3) rotate(-10deg); 
+                        opacity: 0; 
+                    }
+                    50% { 
+                        transform: scale(1.1) rotate(5deg); 
+                        opacity: 1; 
+                    }
+                    100% { 
+                        transform: scale(1) rotate(0deg); 
+                        opacity: 1; 
+                    }
+                }
+
+                /* Animación en el botón del carrito */
+                .cart-clicked {
+                    animation: cartButtonClick 0.3s ease-out;
+                }
+
+                @keyframes cartButtonClick {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                    100% { transform: scale(1); }
+                }
+
+                /* Notificaciones especiales */
+                .empty-cart-notification {
+                    border-left-color: #f59e0b;
+                    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(255, 255, 255, 0.95));
+                }
+
+                .empty-cart-notification i {
+                    color: #f59e0b;
+                }
+
+                .success-notification {
+                    border-left-color: #10b981;
+                    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(255, 255, 255, 0.95));
+                }
+
+                .success-notification i {
+                    color: #10b981;
+                    animation: successPulse 0.8s ease-out;
+                }
+
+                @keyframes successPulse {
+                    0% { transform: scale(0.5); opacity: 0.5; }
+                    50% { transform: scale(1.3); opacity: 1; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+
+                .notification-content small {
+                    display: block;
+                    font-size: 0.8rem;
+                    opacity: 0.8;
+                    margin-top: 0.25rem;
+                }
+
+                /* Responsive para móviles */
+                @media (max-width: 768px) {
+                    .cart-summary-content {
+                        width: 95%;
+                        max-width: none;
+                    }
+                    
+                    .cart-summary-actions {
+                        flex-direction: column;
+                    }
+                    
+                    .cart-notification {
+                        right: 10px;
+                        left: 10px;
+                        min-width: auto;
+                        max-width: none;
+                    }
+                    
+                    .cart-summary-header {
+                        padding: 1.25rem;
+                    }
+                    
+                    .cart-summary-body {
+                        padding: 1.5rem;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .product-modal-content {
+                        width: 95%;
+                        max-height: 95vh;
+                    }
+                    
+                    .product-modal-actions {
+                        flex-direction: column;
+                    }
+                    
+                    .modal-product-price {
+                        font-size: 1.5rem;
+                    }
+                }
+            </style>
+        `;
+
+        // Insertar estilos en el head
+        if (!document.querySelector('#modal-styles')) {
+            const styleElement = document.createElement('div');
+            styleElement.id = 'modal-styles';
+            styleElement.innerHTML = modalStyles;
+            document.head.appendChild(styleElement);
+        }
+
         // Mobile menu functionality
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -556,6 +1624,11 @@
             // Filtros de productos
             const filterButtons = document.querySelectorAll('.filter-btn');
             const productCards = document.querySelectorAll('.product-card');
+            const colorFilter = document.getElementById('color-filter');
+            const sizeFilter = document.getElementById('size-filter');
+            const priceFilter = document.getElementById('price-filter');
+
+            let currentCategoryFilter = 'todos';
 
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -564,25 +1637,97 @@
                     // Agregar clase active al botón clickeado
                     button.classList.add('active');
 
-                    const filter = button.getAttribute('data-filter');
-
-                    productCards.forEach(card => {
-                        if (filter === 'todos' || card.getAttribute('data-category') === filter) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
+                    currentCategoryFilter = button.getAttribute('data-filter');
+                    applyFilters();
                 });
             });
 
-            // Funcionalidad de búsqueda
-            const searchInputs = ['search-input', 'mobile-search-input'];
-            searchInputs.forEach(inputId => {
-                const searchInput = document.getElementById(inputId);
-                if (searchInput) {
-                    searchInput.addEventListener('input', searchProducts);
-                    searchInput.addEventListener('keypress', function(e) {
+            // Filtros avanzados
+            if (colorFilter) colorFilter.addEventListener('change', applyFilters);
+            if (sizeFilter) sizeFilter.addEventListener('change', applyFilters);
+            if (priceFilter) priceFilter.addEventListener('change', applyFilters);
+
+            function applyFilters() {
+                const selectedColor = colorFilter ? colorFilter.value : '';
+                const selectedSize = sizeFilter ? sizeFilter.value : '';
+                const selectedPrice = priceFilter ? priceFilter.value : '';
+
+                productCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const color = card.getAttribute('data-color');
+                    const sizes = card.getAttribute('data-size');
+                    const price = parseInt(card.getAttribute('data-price'));
+
+                    let showCard = true;
+
+                    // Filtro por categoría
+                    if (currentCategoryFilter !== 'todos' && category !== currentCategoryFilter) {
+                        showCard = false;
+                    }
+
+                    // Filtro por color
+                    if (selectedColor && color !== selectedColor) {
+                        showCard = false;
+                    }
+
+                    // Filtro por talla
+                    if (selectedSize && sizes && !sizes.split(',').includes(selectedSize)) {
+                        showCard = false;
+                    }
+
+                    // Filtro por precio
+                    if (selectedPrice) {
+                        if (selectedPrice === '0-50000' && price > 50000) showCard = false;
+                        if (selectedPrice === '50000-100000' && (price < 50000 || price > 100000)) showCard = false;
+                        if (selectedPrice === '100000-150000' && (price < 100000 || price > 150000)) showCard = false;
+                        if (selectedPrice === '150000+' && price < 150000) showCard = false;
+                    }
+
+                    if (showCard) {
+                        card.classList.remove('hidden');
+                        card.style.display = 'block';
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Mostrar mensaje si no hay productos
+                updateNoResultsMessage();
+            }
+
+            function updateNoResultsMessage() {
+                const visibleCards = document.querySelectorAll('.product-card:not(.hidden)');
+                let noResultsMsg = document.getElementById('no-results-message');
+                
+                if (visibleCards.length === 0) {
+                    if (!noResultsMsg) {
+                        noResultsMsg = document.createElement('div');
+                        noResultsMsg.id = 'no-results-message';
+                        noResultsMsg.className = 'no-results-message';
+                        noResultsMsg.innerHTML = `
+                            <div class="no-results-content">
+                                <i class="fas fa-search"></i>
+                                <h3>No se encontraron productos</h3>
+                                <p>Intenta ajustar los filtros para encontrar lo que buscas</p>
+                            </div>
+                        `;
+                        document.getElementById('productos-grid').appendChild(noResultsMsg);
+                    }
+                    noResultsMsg.style.display = 'block';
+                } else {
+                    if (noResultsMsg) {
+                        noResultsMsg.style.display = 'none';
+                    }
+                }
+            }
+
+            // Funcionalidad de búsqueda simplificada
+            const searchInputs = document.querySelectorAll('#search-input, #mobile-search-input');
+            searchInputs.forEach(input => {
+                if (input) {
+                    input.addEventListener('input', searchProducts);
+                    input.addEventListener('keypress', function(e) {
                         if (e.key === 'Enter') {
                             performSearch();
                         }
@@ -602,6 +1747,12 @@
                 button.addEventListener('click', addToCart);
             });
 
+            // Wishlist (corazones)
+            const wishlistButtons = document.querySelectorAll('.add-to-wishlist-btn');
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', toggleWishlist);
+            });
+
             // Toggle carrito
             const cartToggle = document.getElementById('cart-toggle');
             const mobileCartToggle = document.getElementById('mobile-cart-toggle');
@@ -616,7 +1767,107 @@
             // Carousel de proveedores
             initCarousel();
 
-            // Smooth scrolling for anchor links
+            // Función para abrir detalles del producto
+        function openProductDetail(title, image, description, color, sizes, price, category) {
+            const modal = createProductModal(title, image, description, color, sizes, price, category);
+            document.body.appendChild(modal);
+            
+            // Mostrar modal con animación
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 100);
+        }
+
+        // Crear modal de detalles del producto
+        function createProductModal(title, image, description, color, sizes, price, category) {
+            const modal = document.createElement('div');
+            modal.className = 'product-modal';
+            modal.innerHTML = `
+                <div class="product-modal-overlay" onclick="closeProductModal(this)"></div>
+                <div class="product-modal-content">
+                    <div class="product-modal-header">
+                        <h3 class="product-modal-title">${title}</h3>
+                        <button class="product-modal-close" onclick="closeProductModal(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="product-modal-body">
+                        <div class="product-modal-image">
+                            <img src="/static/zapatos/${image}" alt="${title}" class="modal-product-image">
+                            <div class="modal-product-badge">${category}</div>
+                        </div>
+                        <div class="product-modal-info">
+                            <div class="modal-product-category">${category.toUpperCase()}</div>
+                            <p class="modal-product-description">${description}</p>
+                            <div class="modal-product-details">
+                                <div class="modal-detail-item">
+                                    <span class="modal-detail-label">Color:</span>
+                                    <span class="modal-detail-value">${color}</span>
+                                </div>
+                                <div class="modal-detail-item">
+                                    <span class="modal-detail-label">Tallas:</span>
+                                    <span class="modal-detail-value">${sizes}</span>
+                                </div>
+                                <div class="modal-detail-item">
+                                    <span class="modal-detail-label">Material:</span>
+                                    <span class="modal-detail-value">Cuero genuino</span>
+                                </div>
+                            </div>
+                            <div class="modal-product-price">$${parseInt(price).toLocaleString()}</div>
+                            <div class="modal-product-actions">
+                                <button class="modal-add-cart" onclick="addToCartFromModal('${title}', ${price})">
+                                    <i class="fas fa-cart-plus"></i>
+                                    Agregar al Carrito
+                                </button>
+                                <button class="modal-add-wishlist" onclick="toggleWishlistFromModal('${title}')">
+                                    <i class="fas fa-heart"></i>
+                                    Favoritos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return modal;
+        }
+
+        // Cerrar modal de producto
+        function closeProductModal(element) {
+            const modal = element.closest('.product-modal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                document.body.removeChild(modal);
+            }, 300);
+        }
+
+        // Agregar al carrito desde modal
+        function addToCartFromModal(productName, price) {
+            cart.push({
+                name: productName,
+                price: parseInt(price)
+            });
+            updateCartCount();
+            showNotification(`${productName} agregado al carrito`, 'cart');
+            closeProductModal(event.target);
+        }
+
+        // Toggle wishlist desde modal
+        function toggleWishlistFromModal(productName) {
+            const button = event.target.closest('.modal-add-wishlist');
+            button.classList.toggle('liked');
+            
+            if (button.classList.contains('liked')) {
+                button.style.background = '#dc2626';
+                button.style.color = 'white';
+                showNotification(`${productName} agregado a favoritos`, 'wishlist');
+            } else {
+                button.style.background = '';
+                button.style.color = '';
+                showNotification(`${productName} removido de favoritos`, 'wishlist');
+            }
+        }
+
+        // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -666,7 +1917,7 @@
             }
         }
 
-        // Función de búsqueda de productos
+        // Función de búsqueda de productos optimizada
         function searchProducts(searchTerm = null) {
             if (!searchTerm) {
                 searchTerm = event.target.value.toLowerCase();
@@ -675,274 +1926,229 @@
 
             productCards.forEach(card => {
                 const productName = card.querySelector('.product-title').textContent.toLowerCase();
-                const productDescription = card.querySelector('.product-description').textContent.toLowerCase();
-
-                if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                const isVisible = productName.includes(searchTerm);
+                card.style.display = isVisible ? 'block' : 'none';
+                card.classList.toggle('hidden', !isVisible);
             });
 
-            // Reset filtros cuando se busca
-            if (searchTerm) {
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                const todosBtn = document.querySelector('.filter-btn[data-filter="todos"]');
-                if (todosBtn) todosBtn.classList.add('active');
-            }
+            updateNoResultsMessage();
         }
 
-        // Función para agregar al carrito
+        // Función para agregar al carrito simplificada
         function addToCart() {
             const productName = this.getAttribute('data-product');
             const productPrice = parseInt(this.getAttribute('data-price'));
 
-            // Agregar al carrito (simplificado)
-            cart.push({
-                name: productName,
-                price: productPrice
-            });
-
+            cart.push({ name: productName, price: productPrice });
             updateCartCount();
-            showCartNotification(productName);
+            showNotification(`${productName} agregado al carrito`, 'cart');
         }
 
-        // Actualizar contador del carrito
+        // Actualizar contador del carrito con animaciones bonitas
         function updateCartCount() {
             const totalItems = cart.length;
             const cartCount = document.getElementById('cart-count');
             const mobileCartCount = document.getElementById('mobile-cart-count');
             
-            if (cartCount) cartCount.textContent = totalItems;
-            if (mobileCartCount) mobileCartCount.textContent = totalItems;
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+                if (totalItems > 0) {
+                    cartCount.classList.add('visible');
+                    cartCount.classList.add('animate');
+                    setTimeout(() => cartCount.classList.remove('animate'), 600);
+                } else {
+                    cartCount.classList.remove('visible');
+                }
+            }
+            
+            if (mobileCartCount) {
+                mobileCartCount.textContent = totalItems;
+                if (totalItems > 0) {
+                    mobileCartCount.classList.add('visible');
+                    mobileCartCount.classList.add('animate');
+                    setTimeout(() => mobileCartCount.classList.remove('animate'), 600);
+                } else {
+                    mobileCartCount.classList.remove('visible');
+                }
+            }
         }
 
-        // Mostrar notificación de producto agregado
-        function showCartNotification(productName) {
+        // Mostrar notificación bonita del carrito
+        function showNotification(message, type = 'general') {
             const notification = document.createElement('div');
-            notification.className = 'cart-notification';
+            notification.className = `cart-notification ${type}-notification`;
             notification.innerHTML = `
                 <div class="notification-content">
-                    <i class="fas fa-check-circle"></i>
-                    <span>${productName} agregado al carrito</span>
+                    <i class="fas fa-${type === 'cart' ? 'check-circle' : 'heart'}"></i>
+                    <span>${message}</span>
                 </div>
             `;
             
             document.body.appendChild(notification);
             
-            // Animar entrada
+            // Animar entrada con efecto deslizante
             setTimeout(() => {
                 notification.classList.add('show');
             }, 100);
             
-            // Remover después de 3 segundos
+            // Remover después de 3 segundos con animación de salida
             setTimeout(() => {
                 notification.classList.remove('show');
                 setTimeout(() => {
-                    document.body.removeChild(notification);
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
                 }, 300);
             }, 3000);
         }
 
-        // Toggle carrito
+        // Toggle carrito con animaciones bonitas
         function toggleCart() {
-            let cartModal = document.getElementById('cart-modal');
+            const totalItems = cart.length;
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
             
-            if (!cartModal) {
-                createCartModal();
-                cartModal = document.getElementById('cart-modal');
-            }
+            // Animación en el botón del carrito
+            const cartButton = document.getElementById('cart-toggle');
+            const mobileCartButton = document.getElementById('mobile-cart-toggle');
             
-            updateCartModal();
-            cartModal.classList.toggle('hidden');
-        }
-
-        // Crear modal del carrito
-        function createCartModal() {
-            const modalHTML = `
-                <div id="cart-modal" class="cart-modal hidden">
-                    <div class="cart-modal-content">
-                        <div class="cart-modal-header">
-                            <h3 class="cart-modal-title">Carrito de Compras</h3>
-                            <button id="close-cart" class="cart-close-btn">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div id="cart-items" class="cart-items"></div>
-                        <div class="cart-modal-footer">
-                            <div class="cart-total-row">
-                                <span class="cart-total-label">Total:</span>
-                                <span id="cart-total" class="cart-total-amount">$0</span>
-                            </div>
-                            <div class="cart-buttons">
-                                <button id="clear-cart-btn" class="clear-cart-btn">
-                                    <i class="fas fa-trash-alt"></i>
-                                    Vaciar Carrito
-                                </button>
-                                <button id="checkout-btn" class="checkout-btn">
-                                    <i class="fas fa-credit-card"></i>
-                                    Comprar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            document.body.insertAdjacentHTML('beforeend', modalHTML);
-            
-            // Event listener para cerrar
-            document.getElementById('close-cart').addEventListener('click', () => {
-                document.getElementById('cart-modal').classList.add('hidden');
-            });
-            
-            // Event listener para vaciar carrito
-            document.getElementById('clear-cart-btn').addEventListener('click', clearCart);
-            
-            // Event listener para comprar
-            document.getElementById('checkout-btn').addEventListener('click', processCheckout);
-            
-            // Cerrar al hacer click fuera
-            document.getElementById('cart-modal').addEventListener('click', (e) => {
-                if (e.target.id === 'cart-modal') {
-                    e.target.classList.add('hidden');
+            [cartButton, mobileCartButton].forEach(button => {
+                if (button) {
+                    button.classList.add('cart-clicked');
+                    setTimeout(() => button.classList.remove('cart-clicked'), 300);
                 }
             });
-        }
-
-        // Actualizar modal del carrito
-        function updateCartModal() {
-            const cartItems = document.getElementById('cart-items');
-            const cartTotal = document.getElementById('cart-total');
-            const checkoutBtn = document.getElementById('checkout-btn');
-            const clearCartBtn = document.getElementById('clear-cart-btn');
             
-            if (!cartItems) return;
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = `
-                    <div class="cart-empty">
-                        <i class="fas fa-shopping-cart"></i>
-                        <p>Tu carrito está vacío</p>
-                        <p class="cart-empty-subtitle">Agrega algunos productos para continuar</p>
-                    </div>
-                `;
-                cartTotal.textContent = '$0';
-                if (checkoutBtn) checkoutBtn.disabled = true;
-                if (clearCartBtn) clearCartBtn.disabled = true;
+            if (totalItems === 0) {
+                // Mostrar notificación bonita de carrito vacío
+                showEmptyCartNotification();
                 return;
             }
             
-            if (checkoutBtn) checkoutBtn.disabled = false;
-            if (clearCartBtn) clearCartBtn.disabled = false;
-            
-            let total = 0;
-            cartItems.innerHTML = cart.map((item, index) => {
-                total += item.price;
-                
-                return `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <h4 class="cart-item-name">${item.name}</h4>
-                            <p class="cart-item-price">$${item.price.toLocaleString()}</p>
-                        </div>
-                        <button onclick="removeFromCart(${index})" class="cart-item-remove">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-            }).join('');
-            
-            cartTotal.textContent = `$${total.toLocaleString()}`;
+            // Mostrar modal de confirmación con estilo bonito
+            showCartSummaryModal(totalItems, total);
         }
 
-        // Función para vaciar el carrito
-        function clearCart() {
-            cart = [];
-            updateCartCount();
-            updateCartModal();
-            showCartNotification('Carrito vaciado');
-        }
-
-        // Función para procesar la compra
-        function processCheckout() {
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío');
-                return;
-            }
-            
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const itemCount = cart.length;
-            
-            // Mostrar confirmación de compra
-            const confirmation = confirm(`¿Confirmar compra?\n\nProductos: ${itemCount}\nTotal: $${total.toLocaleString()}\n\n¿Deseas proceder con la compra?`);
-            
-            if (confirmation) {
-                // Simular procesamiento de pago
-                const cartModal = document.getElementById('cart-modal');
-                if (cartModal) cartModal.classList.add('hidden');
-                
-                // Vaciar carrito después de la compra
-                cart = [];
-                updateCartCount();
-                
-                // Mostrar mensaje de éxito
-                showPurchaseSuccess(itemCount, total);
-            }
-        }
-
-        // Mostrar mensaje de compra exitosa
-        function showPurchaseSuccess(itemCount, total) {
-            const successModal = document.createElement('div');
-            successModal.className = 'purchase-success-modal';
-            successModal.innerHTML = `
-                <div class="purchase-success-content">
-                    <div class="purchase-success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3 class="purchase-success-title">¡Compra Exitosa!</h3>
-                    <p class="purchase-success-message">
-                        Gracias por tu compra de ${itemCount} producto${itemCount > 1 ? 's' : ''}<br>
-                        Total pagado: $${total.toLocaleString()}
-                    </p>
-                    <p class="purchase-success-info">
-                        Recibirás un correo de confirmación pronto.<br>
-                        Tu pedido será procesado en 1-2 días hábiles.
-                    </p>
-                    <button class="purchase-success-close" onclick="closePurchaseSuccess()">
-                        Continuar Comprando
-                    </button>
+        // Mostrar notificación de carrito vacío
+        function showEmptyCartNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification empty-cart-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Tu carrito está vacío<br><small>¡Agrega algunos productos!</small></span>
                 </div>
             `;
             
-            document.body.appendChild(successModal);
+            document.body.appendChild(notification);
             
-            // Auto cerrar después de 8 segundos
+            setTimeout(() => notification.classList.add('show'), 100);
             setTimeout(() => {
-                closePurchaseSuccess();
-            }, 8000);
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 2500);
         }
 
-        // Cerrar modal de compra exitosa
-        function closePurchaseSuccess() {
-            const modal = document.querySelector('.purchase-success-modal');
-            if (modal) {
-                modal.remove();
-            }
+        // Mostrar modal de resumen del carrito
+        function showCartSummaryModal(totalItems, total) {
+            const modal = document.createElement('div');
+            modal.className = 'cart-summary-modal';
+            modal.innerHTML = `
+                <div class="cart-summary-overlay" onclick="closeCartSummary(this)"></div>
+                <div class="cart-summary-content">
+                    <div class="cart-summary-header">
+                        <div class="cart-summary-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Resumen del Carrito</h3>
+                        <button class="cart-summary-close" onclick="closeCartSummary(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="cart-summary-body">
+                        <div class="cart-summary-info">
+                            <div class="cart-info-item">
+                                <span class="cart-info-label">Productos:</span>
+                                <span class="cart-info-value">${totalItems}</span>
+                            </div>
+                            <div class="cart-info-item total">
+                                <span class="cart-info-label">Total:</span>
+                                <span class="cart-info-value">$${total.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <div class="cart-summary-actions">
+                            <button class="btn-cart-continue" onclick="closeCartSummary(this)">
+                                <i class="fas fa-arrow-left"></i>
+                                Seguir Comprando
+                            </button>
+                            <button class="btn-cart-checkout" onclick="processCartCheckout(${totalItems}, ${total})">
+                                <i class="fas fa-credit-card"></i>
+                                Proceder al Pago
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 100);
         }
 
-        // Remover producto del carrito
-        function removeFromCart(index) {
-            cart.splice(index, 1);
+        // Cerrar modal de carrito
+        function closeCartSummary(element) {
+            const modal = element.closest('.cart-summary-modal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                if (document.body.contains(modal)) {
+                    document.body.removeChild(modal);
+                }
+            }, 300);
+        }
+
+        // Procesar compra del carrito
+        function processCartCheckout(itemCount, total) {
+            cart = [];
             updateCartCount();
-            updateCartModal();
+            
+            // Cerrar modal
+            const modal = document.querySelector('.cart-summary-modal');
+            if (modal) {
+                closeCartSummary(modal.querySelector('.cart-summary-close'));
+            }
+            
+            // Mostrar notificación de éxito
+            showPurchaseSuccessNotification(itemCount, total);
         }
 
-        // Inicializar carousel (solo animación automática)
-        function initCarousel() {
-            // El carousel funciona solo con CSS, no necesita JavaScript para la animación automática
-            console.log('Carousel de proveedores iniciado con animación automática');
+        // Mostrar notificación de compra exitosa
+        function showPurchaseSuccessNotification(itemCount, total) {
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification success-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-check-circle"></i>
+                    <span>¡Compra exitosa!<br><small>${itemCount} producto${itemCount > 1 ? 's' : ''} - $${total.toLocaleString()}</small></span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
         }
+
+        // Inicializar carousel (solo animación CSS automática)
+        console.log('Página cargada - Calzado Bless optimizado');
 
         // Chatbot functionality
         const chatbotToggle = document.getElementById('chatbot-toggle');
@@ -1023,6 +2229,48 @@
             chatbotMessages.appendChild(messageDiv);
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
+
+        // Toggle del wishlist simplificado
+        function toggleWishlist() {
+            const button = this;
+            const productName = button.closest('.product-card').querySelector('.product-title').textContent;
+            
+            button.classList.toggle('liked');
+            const action = button.classList.contains('liked') ? 'agregado a' : 'removido de';
+            showNotification(`${productName} ${action} favoritos`, 'wishlist');
+        }
+
+        // Función de vista rápida
+        function quickView(element) {
+            const productCard = element.closest('.product-card');
+            const productName = productCard.querySelector('.product-title').textContent;
+            const productImage = productCard.querySelector('.product-image').src;
+            const productDescription = productCard.querySelector('.product-description').textContent;
+            const productColor = productCard.querySelector('.product-color').textContent;
+            const productSizes = productCard.querySelector('.product-sizes').textContent;
+            const productPrice = productCard.querySelector('.product-price').textContent;
+            const productCategory = productCard.querySelector('.product-category').textContent;
+            
+            // Usar la función openProductDetail existente
+            openProductDetail(
+                productName,
+                productImage.split('/').pop(),
+                productDescription,
+                productColor,
+                productSizes.replace('Tallas: ', ''),
+                productPrice.replace('$', '').replace('.', ''),
+                productCategory.toLowerCase()
+            );
+        }
+
+        // Agregar event listeners a todos los botones de quick-view
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.quick-view-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    quickView(this);
+                });
+            });
+        });
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
