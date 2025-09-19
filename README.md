@@ -58,7 +58,6 @@ Es importante aclarar que este proyecto fue desarrollado utilizando recursos exi
 - **Bootstrap**: Framework de diseño obtenido de fuentes externas que facilita crear interfaces profesionales y responsivas.
 - **JavaScript**: Permite las interacciones dinámicas como agregar productos al carrito y efectos visuales.
 - **Render.com**: Plataforma en la nube que permite publicar la página web para que esté disponible en internet.
-- **WebP**: Formato de imágenes optimizado que hace que las fotos de productos carguen más rápido.
 
 ## Proceso de desarrollo
 
