@@ -744,9 +744,6 @@
                                 <span>Agregar</span>
                             </button>
                         </div>
-                        <button class="view-more-btn" onclick="addToCartFromModal('Zapato Niña Colorido', 48000)">
-                            Agregar al Carrito
-                        </button>
                     </div>
                 </div>
 
@@ -2479,6 +2476,9 @@
 
         // Función para cambiar pestañas del carrito con animaciones
         function switchCartTab(tabName) {
+            // Cancelar timer de auto-cierre al cambiar pestañas
+            clearTimeout(autoCloseTimer);
+            
             // Actualizar pestañas con animación
             document.querySelectorAll('.cart-tab').forEach(tab => {
                 tab.classList.remove('active');
@@ -2497,6 +2497,11 @@
                 const targetContent = document.getElementById(`${tabName}-tab-content`);
                 targetContent.classList.add('active');
                 targetContent.style.opacity = '1';
+                
+                // Reiniciar timer después del cambio de pestaña
+                setTimeout(() => {
+                    startAutoCloseTimer();
+                }, 3000);
             }, 150);
         }
 
@@ -2518,11 +2523,18 @@
             updateCartCount();
             showNotification(`${productName} agregado al carrito`, 'cart');
             
+            // Cancelar timer de auto-cierre al agregar productos
+            clearTimeout(autoCloseTimer);
+            
             // Mostrar carrito automáticamente
             setTimeout(() => {
                 showCart();
                 // Asegurar que estamos en la pestaña correcta
                 switchCartTab('cart');
+                // Reiniciar timer después de 5 segundos para dar tiempo al usuario a revisar
+                setTimeout(() => {
+                    startAutoCloseTimer();
+                }, 5000);
             }, 500);
         }
 
@@ -2557,7 +2569,7 @@
                             <div class="cart-item-name">${item.name}</div>
                             <div class="cart-item-price">$${item.price.toLocaleString()}</div>
                         </div>
-                        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                        <button class="cart-item-remove" onclick="removeFromCart(${item.id}, event)">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -2566,11 +2578,35 @@
         }
 
         // Función para remover del carrito
-        function removeFromCart(itemId) {
+        function removeFromCart(itemId, event) {
+            // Prevenir que el evento se propague y cierre el carrito
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            
+            const removedItem = cart.find(item => item.id === itemId);
             cart = cart.filter(item => item.id !== itemId);
             updateCartDisplay();
             updateCartCount();
-            showNotification('Producto removido del carrito', 'cart');
+            
+            // Cancelar timer de auto-cierre al interactuar con el carrito
+            clearTimeout(autoCloseTimer);
+            
+            // Mostrar notificación personalizada según el estado del carrito
+            if (cart.length === 0) {
+                showNotification('Carrito vacío. ¡Agrega más productos!', 'cart');
+                // Reiniciar timer solo después de 10 segundos de inactividad
+                setTimeout(() => {
+                    startAutoCloseTimer();
+                }, 10000);
+            } else {
+                showNotification(`${removedItem ? removedItem.name : 'Producto'} removido del carrito`, 'cart');
+                // Reiniciar timer normal después de 3 segundos
+                setTimeout(() => {
+                    startAutoCloseTimer();
+                }, 3000);
+            }
         }
 
         // Función para limpiar el carrito
@@ -2693,6 +2729,9 @@ Me gustaría conocer:
             wishlist = wishlist.filter(item => item.id !== itemId);
             updateWishlistDisplay();
             
+            // Cancelar timer de auto-cierre al interactuar con favoritos
+            clearTimeout(autoCloseTimer);
+            
             // Actualizar botón en la tarjeta de producto
             document.querySelectorAll('.add-to-wishlist-btn').forEach(btn => {
                 const card = btn.closest('.product-card');
@@ -2702,7 +2741,20 @@ Me gustaría conocer:
                 }
             });
             
-            showNotification('Producto removido de favoritos', 'wishlist');
+            // Mostrar notificación personalizada
+            if (wishlist.length === 0) {
+                showNotification('Lista de favoritos vacía. ¡Agrega productos que te gusten!', 'wishlist');
+                // Reiniciar timer después de 8 segundos de inactividad
+                setTimeout(() => {
+                    startAutoCloseTimer();
+                }, 8000);
+            } else {
+                showNotification(`${item ? item.name : 'Producto'} removido de favoritos`, 'wishlist');
+                // Reiniciar timer después de 3 segundos
+                setTimeout(() => {
+                    startAutoCloseTimer();
+                }, 3000);
+            }
         }
 
         // Función para limpiar favoritos
@@ -2773,9 +2825,17 @@ Me gustaría conocer:
                 const cartSidebar = document.getElementById('cart-sidebar');
                 const cartToggle = document.getElementById('cart-toggle');
                 
+                // No cerrar si el click es en botones internos del carrito
+                const isCartInternalButton = e.target.closest('.cart-item-remove') || 
+                                           e.target.closest('.cart-tab') || 
+                                           e.target.closest('.btn-clear-cart') || 
+                                           e.target.closest('.btn-checkout') ||
+                                           e.target.closest('.cart-close');
+                
                 if (!cartSidebar.classList.contains('hidden') && 
                     !cartSidebar.contains(e.target) && 
-                    !cartToggle.contains(e.target)) {
+                    !cartToggle.contains(e.target) &&
+                    !isCartInternalButton) {
                     hideCart();
                 }
             });
@@ -2838,7 +2898,7 @@ Me gustaría conocer:
                             <div class="cart-item-name">${item.name}</div>
                             <div class="cart-item-price">$${item.price.toLocaleString()}</div>
                         </div>
-                        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                        <button class="cart-item-remove" onclick="removeFromCart(${item.id}, event)">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -2936,9 +2996,34 @@ Me gustaría conocer:
         // Limpiar timer cuando se interactúa con el carrito
         document.addEventListener('DOMContentLoaded', function() {
             const cartPanel = document.querySelector('.cart-panel');
+            const cartItems = document.querySelector('.cart-items');
+            
             if (cartPanel) {
+                // Detener timer en hover
                 cartPanel.addEventListener('mouseover', () => clearTimeout(autoCloseTimer));
                 cartPanel.addEventListener('mouseleave', startAutoCloseTimer);
+                
+                // Detener timer cuando se hace scroll en el carrito
+                if (cartItems) {
+                    cartItems.addEventListener('scroll', () => {
+                        clearTimeout(autoCloseTimer);
+                        // Reiniciar timer después de 2 segundos de inactividad en scroll
+                        setTimeout(() => {
+                            startAutoCloseTimer();
+                        }, 2000);
+                    });
+                }
+                
+                // Detener timer cuando se hace clic en cualquier parte del carrito
+                cartPanel.addEventListener('click', (e) => {
+                    // Solo si no es el botón de cerrar
+                    if (!e.target.closest('.cart-close') && !e.target.closest('.cart-overlay')) {
+                        clearTimeout(autoCloseTimer);
+                        setTimeout(() => {
+                            startAutoCloseTimer();
+                        }, 4000);
+                    }
+                });
             }
         });
     </script>
