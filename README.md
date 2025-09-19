@@ -233,13 +233,6 @@ Si tienes problemas con la instalación o despliegue:
 3. **Asegúrate** de que Python 3.8+ esté instalado
 4. **Consulta la documentación** de Flask: [Flask Documentation](https://flask.palletsprojects.com/)
 
-## 🎯 Próximas mejoras
 
-- [ ] Integración con base de datos para almacenar contactos
-- [ ] Panel de administración
-- [ ] Catálogo de productos con imágenes
-- [ ] Sistema de inventario básico
-- [ ] Integración con WhatsApp Business API
-- [ ] Optimización SEO avanzada
-- [ ] Analytics y métricas
+
 
